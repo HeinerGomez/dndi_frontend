@@ -1,0 +1,39 @@
+<form [formGroup]="redeemCouponForm" (ngSubmit)="redeemCoupon()">
+	<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+	<div class="jumbotron">
+		<h3 class="d-flex align-items-center">Redeem a coupon</h3>
+		<hr class="my-4">
+		<div class="row">
+			<div class="col-12">
+				<div class="row">
+					<div class="col-12 col-md-6">
+						<div class="row">
+							<div class="col-2 d-flex justify-content-center align-items-center">
+								<i class="fa fa-qrcode fa-5x"></i>
+							</div>
+							<div class="col-10 d-flex align-items-center">
+								<h5>Please scan the QR code or type it to redeem the coupon:</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-6 form-group mt-3 mt-md-0">
+						<label for="code">Code</label>
+						<input formControlName="code" id="code" type="text" required="required" class="form-control">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--<div class="card">
+		<div class="card-header">Redeem coupon</div>
+		<div class="card-body p-3">
+			<div class="row">
+				<div class="col-6">
+				
+				</div>
+				<div class="col-6">
+				</div>
+			</div>
+		</div>
+	</div>-->
+</form>

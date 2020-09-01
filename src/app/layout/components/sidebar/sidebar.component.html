@@ -1,0 +1,39 @@
+<div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
+	(mouseout)="sidebarHover()">
+	<div class="app-sidebar-content">
+		<div class="app-sidebar-scroll">
+			<perfect-scrollbar [autoPropagation]="true">
+				<div class="v-sidebar-menu vsm-default">
+					<div class="row mt-3">
+						<div class="col-12 d-flex justify-content-center mt-3">
+							<h5 class="text-white">Welcome, <strong>{{ "Aqui el nombre" }}.</strong></h5>
+						</div>
+					</div>
+					<div class="vsm-list">
+						<ngb-accordion [destroyOnHide]="false" [closeOthers]="true">
+							<ngb-panel>
+								<ng-template ngbPanelHeader>
+									<div class="vsm-header ml-2">{{ mainMenuText }}</div>
+								</ng-template>
+							</ngb-panel>
+						</ngb-accordion>
+						<div class="vsm-item">
+							<a [routerLink]="['/dashboard']" routerLinkActive="active-item"
+								[routerLinkActiveOptions]="{ exact: true }" class="vsm-link">
+								<i class="vsm-icon pe-7s-display1"></i>
+								<span class="vsm-title">Modulos</span>
+							</a>
+						</div>
+						<!--<div class="vsm-item">
+							<a [routerLink]="['/products']" routerLinkActive="active-item"
+								[routerLinkActiveOptions]="{ exact: true }" class="vsm-link">
+								<i class="vsm-icon pe-7s-display1"></i>
+								<span class="vsm-title">Otra prueba</span>
+							</a>
+						</div>-->
+					</div>
+				</div>
+			</perfect-scrollbar>
+		</div>
+	</div>
+</div>

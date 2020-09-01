@@ -1,0 +1,33 @@
+<div class="jumbotron">
+	<h1 class="d-flex align-items-center">
+		<i class="lnr-laptop icon-gradient bg-primary mr-3"></i>
+		{{ appName }}
+	</h1>
+	<p class="lead">Bienvenido, <strong>{{ "Aqui el nombre del usuario" }}</strong>.</p>
+	<hr class="my-4">
+	<h5 class="d-flex align-items-center">Accesos Rapidos</h5>
+	<div class="card mt-3">
+		<div class="grid-menu">
+			<div class="no-gutters row">
+				<div class="col-sm-4">
+					<button [routerLink]="['/settings/products']"
+						class="btn-icon-vertical btn-square btn-transition btn btn-outline-link">
+						<i class="fa fa-list-alt btn-icon-wrapper btn-icon-lg mb-3"></i>Products
+					</button>
+				</div>
+				<div class="col-sm-4">
+					<button [routerLink]="['/request-coupons']"
+						class="btn-icon-vertical btn-square btn-transition btn btn-outline-link">
+						<i class="fa fa-share btn-icon-wrapper btn-icon-lg mb-3"></i>Request Coupons
+					</button>
+				</div>
+				<div class="col-sm-4">
+					<button [routerLink]="['/redeem-coupon']"
+						class="btn-icon-vertical btn-square btn-transition btn btn-outline-link">
+						<i class="fa fa-qrcode btn-icon-wrapper btn-icon-lg mb-3"></i>Redeem Coupon
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
