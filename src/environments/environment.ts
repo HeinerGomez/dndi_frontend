@@ -4,9 +4,8 @@
 
 export const environment = {
 	production: false,
-	app: 'vin_foundation',
-	apiURL: 'http://127.0.0.1:8600/api',
-	scaURL: 'http://127.0.0.1:8500/api/v1'
+	app: "dndi",
+	apiURL: "http://127.0.0.1:7777/api",
 };
 
 /*

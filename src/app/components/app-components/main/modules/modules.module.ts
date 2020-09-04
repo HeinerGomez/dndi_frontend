@@ -9,10 +9,17 @@ import { NgBootstrapFormValidationModule } from "ng-bootstrap-form-validation";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { LayoutModule } from "../../../../layout/layout.module";
 import { ModalService } from "../../../../services/shared/modal.service";
-import { ModulesComponent } from './modules/modules.component';
+import { BaseModulesComponent } from "./base-modules/base-modules.component";
+import { RenderModulesComponent } from "./base-modules/render-modules/render-modules.component";
+import { SquarePillButtonComponent } from "../../../shared/square-pill-button/square-pill-button.component";
+import { ComponentsModule } from "../../../components.module";
 
 @NgModule({
-	declarations: [ModulesComponent],
+	declarations: [
+		BaseModulesComponent,
+		RenderModulesComponent,
+		SquarePillButtonComponent,
+	],
 	imports: [
 		CommonModule,
 		FormsModule,
@@ -22,6 +29,7 @@ import { ModulesComponent } from './modules/modules.component';
 		NgBootstrapFormValidationModule,
 		NgSelectModule,
 		LayoutModule,
+		ComponentsModule,
 		ModulesRoutingModule,
 	],
 	providers: [ModalService],

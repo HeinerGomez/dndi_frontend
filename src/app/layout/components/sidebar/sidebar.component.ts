@@ -3,9 +3,6 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import { ThemeOptions } from "../../../theme-options";
 import { select } from "@angular-redux/store";
-import { AuthGuardService } from "@services/guards/auth-guard.service";
-import { AuthService } from "@services/auth/auth.service";
-import { MainService } from "@services/app-services/main.service";
 
 @Component({
 	selector: "app-sidebar",
@@ -21,10 +18,7 @@ export class SidebarComponent implements OnInit {
 	constructor(
 		public globals: ThemeOptions,
 		private router: Router,
-		private activatedRoute: ActivatedRoute,
-		private _authGuard: AuthGuardService,
-		private _authService: AuthService,
-		private _mainService: MainService
+		private activatedRoute: ActivatedRoute
 	) {}
 
 	@select("config")

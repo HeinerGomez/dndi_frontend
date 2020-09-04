@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ThemeOptions } from "../../../../../theme-options";
-import { AuthService } from "@services/auth/auth.service";
 import { NotificationsService } from "@services/shared/notifications.service";
 
 @Component({
@@ -15,7 +14,6 @@ export class UserBoxComponent implements OnInit {
 	constructor(
 		private globals: ThemeOptions,
 		private router: Router,
-		private _authService: AuthService,
 		private _notificationsService: NotificationsService
 	) {}
 

@@ -19,7 +19,7 @@ const routes: Routes = [
 		path: "modules",
 		loadChildren: () =>
 			import("./modules/modules.module").then((m) => m.ModulesModule),
-		data: { breadcrumbs: "Modules" },
+		data: { breadcrumbs: "Modulos" },
 	},
 	/*{
 		path: 'request-coupons',

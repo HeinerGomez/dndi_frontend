@@ -1,0 +1,18 @@
+<div class="square-pill" [ngSwitch]="pillMode">
+    <div *ngSwitchCase="1" class="layout layout-icon-plus">
+        <i [class]="pillIcon"></i>
+    </div>
+
+    <div *ngSwitchCase="2" class="layout-relative">
+        <div class="layout-icon-corner">
+            <i [class]="pillIcon"></i>
+        </div>
+        <div class="layout-text-with-option">
+            <span>{{ module.title }}</span>
+        </div>
+    </div>
+
+    <div *ngSwitchDefault class="layout layout-only-text">
+        <span>{{ module.title }}</span>
+    </div>
+</div>

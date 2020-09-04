@@ -1,12 +1,17 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { ModulesComponent } from "./modules/modules.component";
+import { BaseModulesComponent } from "./base-modules/base-modules.component";
+import { RenderModulesComponent } from "./base-modules/render-modules/render-modules.component";
 
 const routes: Routes = [
 	{
 		path: "",
-		component: ModulesComponent,
-		data: { breadcrumbs: "modules" },
+		component: BaseModulesComponent,
+		children: [
+			{ path: "module/:id", component: RenderModulesComponent },
+			{ path: "**", redirectTo: "module/0" },
+		],
+		data: { breadcrumbs: "" },
 	},
 ];
 
