@@ -26,41 +26,39 @@ export class ErrorsInterceptor implements HttpInterceptor {
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
 		return next.handle(request).pipe(
-			catchError((error) => {
-				switch (error.status) {
+			catchError((errorResponse) => {
+				switch (errorResponse.status) {
 					case 401:
 						this._modalService.reset();
-						localStorage.removeItem("user");
-						localStorage.removeItem("token");
 						this.router.navigate(["/auth/login/"]);
 						this._notificationsService.error({
-							title: "Error",
-							message: error.error.message || error.error.error,
+							title: "Error de privilegios",
+							message: errorResponse.error.error,
 						});
 						break;
 
 					case 403:
 						this._modalService.reset();
 						this._notificationsService.error({
-							title: "Error",
-							message: error.error.message,
+							title: "Ha ocurrido un error interno",
+							message: errorResponse.error.error,
 						});
 						break;
 
 					case 422:
-						if (error.error.message instanceof Object) {
-							Object.values(error.error.message).map((message: any) => {
+						if (errorResponse.error.error instanceof Object) {
+							Object.values(errorResponse.error.error).map((message: any) => {
 								message.map((text: string) => {
 									this._notificationsService.error({
-										title: "Error",
+										title: "Ha ocurrido un error interno",
 										message: text,
 									});
 								});
 							});
 						} else {
 							this._notificationsService.error({
-								title: "Error",
-								message: error.error.message,
+								title: "Ha ocurrido un error interno",
+								message: errorResponse.error.error,
 							});
 						}
 						break;
@@ -68,13 +66,13 @@ export class ErrorsInterceptor implements HttpInterceptor {
 					case 500:
 						this._modalService.reset();
 						this._notificationsService.error({
-							title: "Error",
-							message: error.error.message,
+							title: "Ha ocurrido un error interno",
+							message: errorResponse.error.error,
 						});
 						break;
 				}
 
-				return throwError(error.error);
+				return throwError(errorResponse.error);
 			})
 		);
 	}

@@ -13,13 +13,16 @@ import { BaseModulesComponent } from "./base-modules/base-modules.component";
 import { RenderModulesComponent } from "./base-modules/render-modules/render-modules.component";
 import { SquarePillButtonComponent } from "../../../shared/square-pill-button/square-pill-button.component";
 import { ComponentsModule } from "../../../components.module";
+import { FormModulesComponent } from "./base-modules/form-modules/form-modules.component";
 
 @NgModule({
 	declarations: [
 		BaseModulesComponent,
 		RenderModulesComponent,
 		SquarePillButtonComponent,
+		FormModulesComponent,
 	],
+	entryComponents: [FormModulesComponent],
 	imports: [
 		CommonModule,
 		FormsModule,

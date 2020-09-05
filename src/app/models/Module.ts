@@ -1,24 +1,74 @@
-export class Module {
-	private _id: number;
+import { Model } from "./Model";
+export class Module extends Model {
+	private _id?: number;
 	private _moduleId?: number;
 	private _title: string;
+	private _description: string;
 	private _pathImage?: string;
 	private _diseaseId: number;
 	private _languageId: number;
 
 	constructor(data?: any) {
+		super();
 		if (data) {
-			this.build(data);
+			this.serialize(data);
 		}
 	}
 
-	private build(data: any) {
+	public serialize(data: any) {
 		this._id = data["id"];
 		this._moduleId = data["module_id"];
 		this._title = data["title"];
+		this._description = data["description"];
 		this._pathImage = data["path_image"];
 		this._diseaseId = data["disease_id"];
 		this._languageId = data["language_id"];
+	}
+
+	public deserialize() {
+		return {
+			id: this._id,
+			module_id: this._moduleId,
+			title: this._title,
+			description: this._description,
+			path_image: this._pathImage,
+			disease_id: this._diseaseId,
+			language_id: this._languageId,
+		};
+	}
+
+	public static deserializeFromData(data: any) {
+		const transformData: any = {};
+
+		if (data["id"]) {
+			transformData.id = data["id"];
+		}
+
+		if (data["moduleId"]) {
+			transformData.module_id = data["moduleId"];
+		}
+
+		if (data["title"]) {
+			transformData.title = data["title"];
+		}
+
+		if (data["description"]) {
+			transformData.description = data["description"];
+		}
+
+		if (data["pathImage"]) {
+			transformData.path_image = data["pathImage"];
+		}
+
+		if (data["diseaseId"]) {
+			transformData.disease_id = data["diseaseId"];
+		}
+
+		if (data["languageId"]) {
+			transformData.language_id = data["languageId"];
+		}
+
+		return transformData;
 	}
 
 	public get id(): number {
@@ -45,6 +95,14 @@ export class Module {
 		this._title = value;
 	}
 
+	public get description(): string {
+		return this._description;
+	}
+
+	public set description(value: string) {
+		this._description = value;
+	}
+
 	public get pathImage(): string {
 		return this._pathImage;
 	}
@@ -53,11 +111,11 @@ export class Module {
 		this._pathImage = value;
 	}
 
-	public get disease(): number {
+	public get diseaseId(): number {
 		return this._diseaseId;
 	}
 
-	public set disease(value: number) {
+	public set diseaseId(value: number) {
 		this._diseaseId = value;
 	}
 

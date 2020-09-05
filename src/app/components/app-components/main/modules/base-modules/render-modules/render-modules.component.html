@@ -32,10 +32,12 @@
     </div>
     <div class="row">
         <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngFor="let module of modules; let i = index">
-            <square-pill-button [pillMode]="2" [pillIcon]="'fa fa-pencil'" [module]="module"></square-pill-button>
+            <square-pill-button (clickIconCorner)="openModal($event)" [pillMode]="2" [pillIcon]="'fa fa-pencil'"
+                [module]="module">
+            </square-pill-button>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 mt-5">
-            <square-pill-button [pillMode]="1" [pillIcon]="'fa fa-plus'"></square-pill-button>
+            <square-pill-button (click)="openModal()" [pillMode]="1" [pillIcon]="'fa fa-plus'"></square-pill-button>
         </div>
     </div>
 </div>

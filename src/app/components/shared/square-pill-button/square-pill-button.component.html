@@ -4,7 +4,7 @@
     </div>
 
     <div *ngSwitchCase="2" class="layout-relative">
-        <div class="layout-icon-corner">
+        <div class="layout-icon-corner" (click)="handleClickIconCorner()">
             <i [class]="pillIcon"></i>
         </div>
         <div class="layout-text-with-option">

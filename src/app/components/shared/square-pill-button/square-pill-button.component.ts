@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Module } from "../../../models/Module";
 
 @Component({
@@ -16,7 +16,16 @@ export class SquarePillButtonComponent implements OnInit {
 	@Input("module")
 	public module: Module;
 
+	@Output("clickIconCorner")
+	public clickIconCorner = new EventEmitter<Module>();
+
 	constructor() {}
 
 	ngOnInit() {}
+
+	public handleClickIconCorner() {
+		if (this.clickIconCorner && this.module) {
+			this.clickIconCorner.emit(this.module);
+		}
+	}
 }

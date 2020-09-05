@@ -23,4 +23,19 @@ export class ModulesService {
 
 		return modules;
 	}
+
+	public async createModule(data: any) {
+		const response: any = await this.http
+			.post(`${environment.apiURL}/modules`, data)
+			.toPromise();
+		return new Module(response.data);
+	}
+
+	public async updateModule(data: any, moduleId: number) {
+		const response: any = await this.http
+			.put(`${environment.apiURL}/modules/${moduleId}`, data)
+			.toPromise();
+
+		return new Module(response.data);
+	}
 }
