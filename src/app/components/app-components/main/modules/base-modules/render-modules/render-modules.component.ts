@@ -5,6 +5,7 @@ import { Module } from "../../../../../../models/Module";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ModalService } from "../../../../../../services/shared/modal.service";
 import { FormModulesComponent } from "../form-modules/form-modules.component";
+import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
 	selector: "app-render-modules",
@@ -13,7 +14,7 @@ import { FormModulesComponent } from "../form-modules/form-modules.component";
 })
 export class RenderModulesComponent implements OnInit {
 	public reactiveForm: FormGroup;
-	public moduleId: string;
+	public moduleId: number;
 	public modules: Module[];
 	private modulesWithoutFilter: Module[];
 
@@ -22,7 +23,8 @@ export class RenderModulesComponent implements OnInit {
 		private route: ActivatedRoute,
 		private modulesService: ModulesService,
 		private formBuilder: FormBuilder,
-		private modalService: ModalService
+		private modalService: ModalService,
+		private config: NgbDropdownConfig
 	) {
 		this.modules = [];
 	}
@@ -30,7 +32,7 @@ export class RenderModulesComponent implements OnInit {
 	ngOnInit() {
 		this.reactiveForm = this.defineReactiveForm();
 		this.route.params.subscribe((params) => {
-			this.moduleId = params["id"];
+			this.moduleId = parseInt(params["id"]);
 			this.renderView();
 		});
 	}
@@ -48,8 +50,17 @@ export class RenderModulesComponent implements OnInit {
 			control.reset();
 		}
 
-		this.modules = await this.modulesService.getRootModules();
+		if (this.moduleId == 0) {
+			this.modules = await this.modulesService.getRootModules();
+		} else {
+			this.modules = await this.modulesService.getChildModules(this.moduleId);
+		}
+
 		this.modulesWithoutFilter = this.modules;
+	}
+
+	public enterModule(module: Module): void {
+		this.router.navigate([`/modules/module/${module.id}`]);
 	}
 
 	public searchModules(): void {

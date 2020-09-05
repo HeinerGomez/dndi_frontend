@@ -24,6 +24,21 @@ export class ModulesService {
 		return modules;
 	}
 
+	public async getChildModules(parentModuleId: number) {
+		const response = await this.http
+			.get(`${environment.apiURL}/childModules/${parentModuleId}`)
+			.toPromise();
+
+		const data: any[] = response["data"];
+		const modules: Module[] = [];
+
+		if (data.length > 0) {
+			data.map((row) => modules.push(new Module(row)));
+		}
+
+		return modules;
+	}
+
 	public async createModule(data: any) {
 		const response: any = await this.http
 			.post(`${environment.apiURL}/modules`, data)

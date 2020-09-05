@@ -7,12 +7,12 @@
         <div class="layout-icon-corner" (click)="handleClickIconCorner()">
             <i [class]="pillIcon"></i>
         </div>
-        <div class="layout-text-with-option">
+        <div class="layout-text-with-option" (click)="handleClickPill()">
             <span>{{ module.title }}</span>
         </div>
     </div>
 
-    <div *ngSwitchDefault class="layout layout-only-text">
+    <div *ngSwitchDefault class="layout layout-only-text" (click)="handleClickPill()">
         <span>{{ module.title }}</span>
     </div>
 </div>
