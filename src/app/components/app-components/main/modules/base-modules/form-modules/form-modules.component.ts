@@ -65,8 +65,6 @@ export class FormModulesComponent implements OnInit {
 
 		this.parentModuleId = parseInt(params.parentModuleId);
 
-		console.info("parentModuleId: ", this.parentModuleId);
-
 		if (params.isForCreate) {
 			this.currentMode = modes.CREATE;
 		} else {
@@ -79,11 +77,13 @@ export class FormModulesComponent implements OnInit {
 		return this.currentMode == modes.CREATE;
 	}
 
+	public isRootModule(): boolean {
+		return this.parentModuleId == 0;
+	}
+
 	public async save() {
 		const data = this.reactiveForm.value;
-		console.info("data: ", data);
 		const transformData = Module.deserializeFromData(data);
-		console.info("transformData: ", transformData);
 
 		if (this.isCreateMode()) {
 			const moduleCreated: Module = await this.modulesService.createModule(
@@ -108,5 +108,21 @@ export class FormModulesComponent implements OnInit {
 
 		this.modalService.emitData({ shouldReload: true });
 		this.modalService.close();
+	}
+
+	public async delete() {
+		if (!this.isCreateMode()) {
+			const moduleDeleted: Module = await this.modulesService.deleteModule(
+				this.module.id
+			);
+
+			this.notificationsService.success({
+				title: "Módulo eliminado exitosamente",
+				message: `El módulo: ${moduleDeleted.title}, fue eliminado con exito!`,
+			});
+
+			this.modalService.emitData({ shouldReload: true });
+			this.modalService.close();
+		}
 	}
 }
