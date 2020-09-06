@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Module } from "../../../models/Module";
 import { Router } from "@angular/router";
+import { Content } from "../../../models/Content";
 
 @Component({
 	selector: "square-pill-button",
@@ -17,11 +18,14 @@ export class SquarePillButtonComponent implements OnInit {
 	@Input("module")
 	public module: Module;
 
+	@Input("content")
+	public content: Content;
+
 	@Output("clickIconCorner")
 	public clickIconCorner = new EventEmitter<Module>();
 
 	@Output("clickPill")
-	public clickPill = new EventEmitter<Module>();
+	public clickPill = new EventEmitter<Module | Content>();
 
 	constructor(private router: Router) {}
 
@@ -34,8 +38,12 @@ export class SquarePillButtonComponent implements OnInit {
 	}
 
 	public handleClickPill() {
-		if (this.clickPill) {
+		if (this.clickPill && this.module) {
 			this.clickPill.emit(this.module);
+		}
+
+		if (this.clickPill && this.content) {
+			this.clickPill.emit(this.content);
 		}
 	}
 }

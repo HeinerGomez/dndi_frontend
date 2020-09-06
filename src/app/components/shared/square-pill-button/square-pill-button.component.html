@@ -1,5 +1,5 @@
 <div class="square-pill" [ngSwitch]="pillMode">
-    <div *ngSwitchCase="1" class="layout layout-icon-plus">
+    <div *ngSwitchCase="1" class="layout layout-icon-plus" (click)="handleClickPill()">
         <i [class]="pillIcon"></i>
     </div>
 
@@ -9,6 +9,12 @@
         </div>
         <div class="layout-text-with-option" (click)="handleClickPill()">
             <span>{{ module.title }}</span>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="3" class="layout-relative">
+        <div class="layout-text-with-option invested-color" (click)="handleClickPill()">
+            <span>{{ content.title }}</span>
         </div>
     </div>
 

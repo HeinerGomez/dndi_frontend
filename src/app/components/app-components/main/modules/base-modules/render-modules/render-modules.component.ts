@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ModalService } from "../../../../../../services/shared/modal.service";
 import { FormModulesComponent } from "../form-modules/form-modules.component";
 import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
+import { Content } from "../../../../../../models/Content";
+import { ContentsService } from "../../../../../../services/app-services/contents.service";
 
 @Component({
 	selector: "app-render-modules",
@@ -16,17 +18,20 @@ export class RenderModulesComponent implements OnInit {
 	public reactiveForm: FormGroup;
 	public moduleId: number;
 	public modules: Module[];
+	public content: Content;
 	private modulesWithoutFilter: Module[];
 
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private modulesService: ModulesService,
+		private contentsService: ContentsService,
 		private formBuilder: FormBuilder,
 		private modalService: ModalService,
 		private config: NgbDropdownConfig
 	) {
 		this.modules = [];
+		this.content = null;
 	}
 
 	ngOnInit() {
@@ -54,6 +59,10 @@ export class RenderModulesComponent implements OnInit {
 			this.modules = await this.modulesService.getRootModules();
 		} else {
 			this.modules = await this.modulesService.getChildModules(this.moduleId);
+			this.content = await this.contentsService.getContentOfModule(
+				this.moduleId
+			);
+			console.info("Content: ", this.content);
 		}
 
 		this.modulesWithoutFilter = this.modules;
@@ -106,5 +115,9 @@ export class RenderModulesComponent implements OnInit {
 				this.modalService.resetEmitData();
 			}
 		});
+	}
+
+	public isRootModule(): boolean {
+		return this.moduleId == 0;
 	}
 }

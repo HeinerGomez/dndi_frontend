@@ -3,7 +3,7 @@ export class Module extends Model {
 	private _id?: number;
 	private _moduleId?: number;
 	private _title: string;
-	private _description: string;
+	private _description?: string;
 	private _pathImage?: string;
 	private _diseaseId: number;
 	private _languageId: number;
