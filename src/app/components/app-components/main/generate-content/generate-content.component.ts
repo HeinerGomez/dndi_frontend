@@ -127,7 +127,7 @@ export class GenerateContentComponent implements OnInit {
 			});
 		}
 
-		this.router.navigate(["/modules/module/0"]);
+		this.router.navigate([`/modules/module/${this.moduleId}'`]);
 	}
 
 	private transformData(): any {
