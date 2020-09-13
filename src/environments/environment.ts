@@ -5,7 +5,7 @@
 export const environment = {
 	production: false,
 	app: "dndi",
-	apiURL: "https://dndi.herokuapp.com/api",
+	apiURL: "http://127.0.0.1:7777/api",
 };
 
 /*

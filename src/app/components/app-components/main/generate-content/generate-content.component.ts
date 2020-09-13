@@ -84,6 +84,17 @@ export class GenerateContentComponent implements OnInit {
 		this.reactiveForm.get("moduleTitle").setValue(this.module.title);
 
 		this.possibleLinkModules = data.possibleLinkModules;
+
+		let idsLinksModules: number[] = [];
+		this.possibleLinkModules.map((linkModule) => {
+			if (linkModule.contentId != null) {
+				idsLinksModules.push(linkModule.id);
+			}
+		});
+
+		if (idsLinksModules.length > 0) {
+			this.reactiveForm.get("linkContentsIds").setValue(idsLinksModules);
+		}
 	}
 
 	public isForCreate(): boolean {
