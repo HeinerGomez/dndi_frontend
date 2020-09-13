@@ -19,5 +19,7 @@ export class UserBoxComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	async logout(): Promise<any> {}
+	async logout(): Promise<any> {
+		this.router.navigate(["/auth/login"]);
+	}
 }

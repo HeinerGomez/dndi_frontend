@@ -21,6 +21,8 @@ export class FormModulesComponent implements OnInit {
 	private module: Module;
 	private parentModuleId: number;
 	public reactiveForm: FormGroup;
+	private selectedFile: File;
+	public urlImage: any;
 
 	constructor(
 		private modalDataService: ModalDataService,
@@ -34,6 +36,8 @@ export class FormModulesComponent implements OnInit {
 		this.module = null;
 		this.extractData();
 		this.reactiveForm = this.defineReactiveForm();
+		this.selectedFile = null;
+		this.urlImage = null;
 	}
 
 	private defineReactiveForm(): FormGroup {
@@ -47,6 +51,8 @@ export class FormModulesComponent implements OnInit {
 				isCreateMode ? "" : this.module.description,
 				[Validators.minLength(10)],
 			],
+			isContentLink: [isCreateMode ? null : this.module.isContentLink],
+			contentId: [isCreateMode ? null : this.module.contentId],
 			pathImage: [""],
 			diseaseId: [
 				isCreateMode ? 1 : this.module.diseaseId,
@@ -79,6 +85,42 @@ export class FormModulesComponent implements OnInit {
 
 	public isRootModule(): boolean {
 		return this.parentModuleId == 0;
+	}
+
+	public handleChangeFile(event: any): void {
+		const files: File[] = event.target.files;
+		if (files.length) {
+			if (
+				files[0].type == "image/png" ||
+				files[0].type == "image/jpeg" ||
+				files[0].type == "image/jpg" ||
+				files[0].type == "image/svg+xml" ||
+				files[0].type == "image/svg"
+			) {
+				this.selectedFile = files[0];
+				this.notificationsService.success({
+					title: "Imagen Cargada",
+					message: "Imagen cargada con exito",
+				});
+				this.generateImageUrl();
+			} else {
+				this.notificationsService.error({
+					title: "Error en la carga",
+					message: "No se logró cargar la imagen",
+				});
+			}
+		} else {
+			console.warn("No se ha seleccionado ningun archivo");
+		}
+	}
+
+	private generateImageUrl() {
+		const reader = new FileReader();
+		reader.readAsDataURL(this.selectedFile);
+		reader.onload = (_event) => {
+			this.urlImage = reader.result;
+			console.log("Url Image: " + this.urlImage);
+		};
 	}
 
 	public async save() {

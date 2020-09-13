@@ -37,23 +37,23 @@
             </square-pill-button>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngIf="content">
-            <square-pill-button [pillMode]="3" [content]="content">
+            <square-pill-button [pillMode]="3" (clickPill)="navigateToGenerateContent($event)" [content]="content">
             </square-pill-button>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 mt-5" ngbDropdown placement="top-right" #dropOptions="ngbDropdown"
-            *ngIf="!isRootModule() && !content">
+            *ngIf="!isRootModule()">
             <div (click)="$event.stopPropagation(); dropOptions.open();">
                 <square-pill-button [pillMode]="1" [pillIcon]="'fa fa-plus'">
                 </square-pill-button>
             </div>
             <div ngbDropdownMenu class="dropdown-menu-right-rounded">
                 <button class="dropdown-item" (click)="openModal()">Crear sub módulo</button>
-                <button class="dropdown-item" [disabled]="modules.length > 0">Crear
+                <button class="dropdown-item" (click)="navigateToGenerateContent()" [disabled]="content">Crear
                     contenido</button>
             </div>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngIf="isRootModule()">
-            <square-pill-button (clickPill)="openModal($event)" [pillMode]="1" [pillIcon]="'fa fa-plus'">
+            <square-pill-button (click)="openModal()" [pillMode]="1" [pillIcon]="'fa fa-plus'">
             </square-pill-button>
         </div>
     </div>

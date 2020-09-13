@@ -21,6 +21,14 @@ const routes: Routes = [
 			import("./modules/modules.module").then((m) => m.ModulesModule),
 		data: { breadcrumbs: "Modulos" },
 	},
+	{
+		path: "generate-content/:moduleId",
+		loadChildren: () =>
+			import("./generate-content/generate-content.module").then(
+				(m) => m.GenerateContentModule
+			),
+		data: { breadcrumbs: "Generador de contenidos" },
+	},
 	/*{
 		path: 'request-coupons',
 		loadChildren: () => import('./coupons/coupons.module').then(m => m.CouponsModule),

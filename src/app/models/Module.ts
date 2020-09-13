@@ -4,6 +4,8 @@ export class Module extends Model {
 	private _moduleId?: number;
 	private _title: string;
 	private _description?: string;
+	private _isContentLink: number;
+	private _contentId: number;
 	private _pathImage?: string;
 	private _diseaseId: number;
 	private _languageId: number;
@@ -20,6 +22,8 @@ export class Module extends Model {
 		this._moduleId = data["module_id"];
 		this._title = data["title"];
 		this._description = data["description"];
+		this._contentId = data["content_id"];
+		this._isContentLink = data["is_content_link"];
 		this._pathImage = data["path_image"];
 		this._diseaseId = data["disease_id"];
 		this._languageId = data["language_id"];
@@ -54,6 +58,14 @@ export class Module extends Model {
 
 		if (data["description"]) {
 			transformData.description = data["description"];
+		}
+
+		if (data["isContentLink"]) {
+			transformData.is_content_link = data["isContentLink"];
+		}
+
+		if (data["contentId"]) {
+			transformData.content_id = data["contentId"];
 		}
 
 		if (data["pathImage"]) {
@@ -101,6 +113,22 @@ export class Module extends Model {
 
 	public set description(value: string) {
 		this._description = value;
+	}
+
+	public get isContentLink(): number {
+		return this._isContentLink;
+	}
+
+	public set isContentLink(value: number) {
+		this._isContentLink = value;
+	}
+
+	public get contentId(): number {
+		return this._contentId;
+	}
+
+	public set contentId(value: number) {
+		this._contentId = value;
 	}
 
 	public get pathImage(): string {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ModulesService } from "../../../../../../services/app-services/modules.service";
 import { Module } from "../../../../../../models/Module";
@@ -8,13 +8,14 @@ import { FormModulesComponent } from "../form-modules/form-modules.component";
 import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 import { Content } from "../../../../../../models/Content";
 import { ContentsService } from "../../../../../../services/app-services/contents.service";
+import { ShareDataService } from "../../../../../../services/shared/share-data.service";
 
 @Component({
 	selector: "app-render-modules",
 	templateUrl: "./render-modules.component.html",
 	styles: [],
 })
-export class RenderModulesComponent implements OnInit {
+export class RenderModulesComponent implements OnInit, OnDestroy {
 	public reactiveForm: FormGroup;
 	public moduleId: number;
 	public modules: Module[];
@@ -28,7 +29,7 @@ export class RenderModulesComponent implements OnInit {
 		private contentsService: ContentsService,
 		private formBuilder: FormBuilder,
 		private modalService: ModalService,
-		private config: NgbDropdownConfig
+		private shareDataService: ShareDataService
 	) {
 		this.modules = [];
 		this.content = null;
@@ -50,6 +51,7 @@ export class RenderModulesComponent implements OnInit {
 
 	private async renderView() {
 		const control = this.getcontrol("searchTerm");
+		this.content = null;
 
 		if (control.dirty) {
 			control.reset();
@@ -119,5 +121,22 @@ export class RenderModulesComponent implements OnInit {
 
 	public isRootModule(): boolean {
 		return this.moduleId == 0;
+	}
+
+	public navigateToGenerateContent(content: Content): void {
+		if (content) {
+			console.log("Se pasa esta data: " + content);
+			this.shareDataService.data = { content: content, isForCreate: false };
+			this.router.navigate([`/generate-content/${content.moduleId}`]);
+		} else {
+			console.log("No se pasa nada ...");
+			this.shareDataService.data = { isForCreate: true };
+			this.router.navigate([`/generate-content/${this.moduleId}`]);
+		}
+	}
+
+	ngOnDestroy() {
+		this.content = null;
+		this.modules = [];
 	}
 }

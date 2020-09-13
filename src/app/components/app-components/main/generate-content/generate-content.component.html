@@ -1,0 +1,42 @@
+<app-page-title [heading]="'Generador de contenidos'"
+    [subheading]="'Aqui puede generar contenido para un módulo en especifico'"
+    [icon]="'fa fa-columns icon-gradient bg-dndi-primary'">
+</app-page-title>
+<div [formGroup]="reactiveForm">
+    <div class="card mb-5">
+        <div class="card-header">Generar Contenido</div>
+        <div class="card-body">
+            <div class="row mt-5">
+                <div class="col-md-4 form-group">
+                    <label for="title">Titulo</label>
+                    <input id="title" formControlName="title" type="text" placeholder="Titulo" class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="modulo">Modulo</label>
+                    <input id="modulo" formControlName="moduleTitle" type="text" placeholder="Titulo Modulo"
+                        class="form-control">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="modulosEnlace">Modulos de enlace</label>
+                    <ng-select id="modulosEnlace" bindLabel="modulosEnlace" [multiple]="'true'"
+                        formControlName="linkContentsIds">
+                        <ng-option [value]="item.id" *ngFor="let item of possibleLinkModules">{{ item.title }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <angular-editor formControlName="content" [config]="editorConfig"></angular-editor>
+            <div class="row mt-5 justify-content-end">
+                <div class="col-4">
+                    <button (click)="save()" [disabled]="reactiveForm.invalid"
+                        class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                        data-style="expand-right">
+                        <span>
+                            Guardar Contenido
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,17 +9,18 @@
             </div>
             <div class="row ml-5" *ngIf="isRootModule()">
                 <div class="col-2">
-                    <div>
-                        Aqui img
+                    <div sticky-image>
+                        <img [src]="urlImage" width="100" height="100" *ngIf="urlImage != null" />
                     </div>
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-sm btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                    <!--<button class="btn btn-sm btn-pill btn-outline-primary btn-outline-2x ladda-button"
                         data-style="expand-left">
                         <span>
                             Subir Imagen
                         </span>
-                    </button>
+                    </button>-->
+                    <input type="file" class="hide-file-button" (change)="handleChangeFile($event)" />
                 </div>
             </div>
             <div class="row mt-5 ml-5">
@@ -33,6 +34,12 @@
                     <label for="description">Descripción</label>
                     <textarea formControlName="description" id="description" type="text" placeholder="Descripción"
                         class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row ml-5">
+                <div class="col-md-6 form-group">
+                    <input formControlName="isContentLink" id="is_content_link" type="checkbox">
+                    <label class="ml-2" for="is_content_link">Es para contenido de enlace</label>
                 </div>
             </div>
             <div class="row mt-5 justify-content-end">
