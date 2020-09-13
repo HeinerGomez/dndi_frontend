@@ -98,7 +98,9 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 	public openModal(module: Module): void {
 		console.warn("Este es el modulo: ", module);
 
-		const title = module ? "Editar Modulo" : "Crear Modulo";
+		let title = module ? "Editar " : "Crear ";
+
+		title = title + (this.isRootModule() ? "Módulo" : "Sub Módulo");
 
 		this.modalService.open({
 			component: FormModulesComponent,
@@ -125,11 +127,9 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 
 	public navigateToGenerateContent(content: Content): void {
 		if (content) {
-			console.log("Se pasa esta data: " + content);
 			this.shareDataService.data = { content: content, isForCreate: false };
 			this.router.navigate([`/generate-content/${content.moduleId}`]);
 		} else {
-			console.log("No se pasa nada ...");
 			this.shareDataService.data = { isForCreate: true };
 			this.router.navigate([`/generate-content/${this.moduleId}`]);
 		}

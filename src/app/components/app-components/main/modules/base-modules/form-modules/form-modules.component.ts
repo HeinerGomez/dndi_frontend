@@ -23,6 +23,7 @@ export class FormModulesComponent implements OnInit {
 	public reactiveForm: FormGroup;
 	private selectedFile: File;
 	public urlImage: any;
+	public titleForm: string;
 
 	constructor(
 		private modalDataService: ModalDataService,
@@ -38,6 +39,7 @@ export class FormModulesComponent implements OnInit {
 		this.reactiveForm = this.defineReactiveForm();
 		this.selectedFile = null;
 		this.urlImage = null;
+		this.titleForm = this.isRootModule() ? "Módulo" : "Sub Módulo";
 	}
 
 	private defineReactiveForm(): FormGroup {
@@ -46,7 +48,14 @@ export class FormModulesComponent implements OnInit {
 		return this.formBuilder.group({
 			id: [isCreateMode ? null : this.module.id],
 			moduleId: [this.parentModuleId == 0 ? null : this.parentModuleId],
-			title: [isCreateMode ? "" : this.module.title, [Validators.required]],
+			title: [
+				isCreateMode ? "" : this.module.title,
+				[
+					Validators.required,
+					Validators.minLength(4),
+					Validators.maxLength(45),
+				],
+			],
 			description: [
 				isCreateMode ? "" : this.module.description,
 				[Validators.minLength(10)],
