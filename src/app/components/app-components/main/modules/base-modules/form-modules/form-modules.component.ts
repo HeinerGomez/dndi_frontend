@@ -35,10 +35,10 @@ export class FormModulesComponent implements OnInit {
 
 	ngOnInit() {
 		this.module = null;
+		this.urlImage = null;
 		this.extractData();
 		this.reactiveForm = this.defineReactiveForm();
 		this.selectedFile = null;
-		this.urlImage = null;
 		this.titleForm = this.isRootModule() ? "Módulo" : "Sub Módulo";
 	}
 
@@ -84,6 +84,7 @@ export class FormModulesComponent implements OnInit {
 			this.currentMode = modes.CREATE;
 		} else {
 			this.module = params.module;
+			this.urlImage = this.module.pathImage;
 			this.currentMode = modes.UPDATE;
 		}
 	}
@@ -128,7 +129,6 @@ export class FormModulesComponent implements OnInit {
 		reader.readAsDataURL(this.selectedFile);
 		reader.onload = (_event) => {
 			this.urlImage = reader.result;
-			console.log("Url Image: " + this.urlImage);
 		};
 	}
 
@@ -145,6 +145,8 @@ export class FormModulesComponent implements OnInit {
 				title: "Módulo creado exitosamente",
 				message: `El módulo: ${moduleCreated.title}, fue creado con exito!`,
 			});
+
+			this.uploadImage(moduleCreated.id);
 		} else {
 			const moduleUpdated: Module = await this.modulesService.updateModule(
 				transformData,
@@ -155,10 +157,29 @@ export class FormModulesComponent implements OnInit {
 				title: "Módulo actualizado exitosamente",
 				message: `El módulo: ${moduleUpdated.title}, fue actualizado con exito!`,
 			});
+
+			this.uploadImage(moduleUpdated.id);
 		}
 
 		this.modalService.emitData({ shouldReload: true });
 		this.modalService.close();
+	}
+
+	private async uploadImage(moduleId: number) {
+		const formData = new FormData();
+		formData.append("imageModule", this.selectedFile);
+
+		if (this.selectedFile != null) {
+			const moduleUpdated: Module = await this.modulesService.uploadImage(
+				formData,
+				moduleId
+			);
+
+			this.notificationsService.success({
+				title: "Imagen cargada",
+				message: `La imagen ha sido asociada al módulo: ${moduleUpdated.title}`,
+			});
+		}
 	}
 
 	public async delete() {

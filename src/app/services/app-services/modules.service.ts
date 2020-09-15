@@ -54,6 +54,14 @@ export class ModulesService {
 		return new Module(response.data);
 	}
 
+	public async uploadImage(data: any, moduleId: number) {
+		const response: any = await this.http
+			.post(`${environment.apiURL}/loadImageModule/${moduleId}`, data)
+			.toPromise();
+
+		return new Module(response.data);
+	}
+
 	public async deleteModule(moduleId: number) {
 		const response: any = await this.http
 			.delete(`${environment.apiURL}/modules/${moduleId}`)

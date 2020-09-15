@@ -96,8 +96,6 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 	}
 
 	public openModal(module: Module): void {
-		console.warn("Este es el modulo: ", module);
-
 		let title = module ? "Editar " : "Crear ";
 
 		title = title + (this.isRootModule() ? "Módulo" : "Sub Módulo");

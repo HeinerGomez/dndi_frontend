@@ -1,4 +1,6 @@
+import { stream } from "xlsx/types";
 import { Model } from "./Model";
+import { environment } from "../../environments/environment";
 export class Module extends Model {
 	private _id?: number;
 	private _moduleId?: number;
@@ -6,7 +8,7 @@ export class Module extends Model {
 	private _description?: string;
 	private _isContentLink: number;
 	private _contentId: number;
-	private _pathImage?: string;
+	private _pathImage: string;
 	private _diseaseId: number;
 	private _languageId: number;
 
@@ -25,6 +27,10 @@ export class Module extends Model {
 		this._contentId = data["content_id"];
 		this._isContentLink = data["is_content_link"];
 		this._pathImage = data["path_image"];
+		if (this._pathImage != null) {
+			this._pathImage =
+				environment.imagesURl + this._pathImage.replace("public", "");
+		}
 		this._diseaseId = data["disease_id"];
 		this._languageId = data["language_id"];
 	}
