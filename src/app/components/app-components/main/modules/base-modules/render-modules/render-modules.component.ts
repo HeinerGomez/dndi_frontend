@@ -9,6 +9,11 @@ import { NgbDropdownConfig } from "@ng-bootstrap/ng-bootstrap";
 import { Content } from "../../../../../../models/Content";
 import { ContentsService } from "../../../../../../services/app-services/contents.service";
 import { ShareDataService } from "../../../../../../services/shared/share-data.service";
+import {
+	NavigationRibbonData,
+	NavigationRibbonConfig,
+} from "../../../../../shared/navigation-ribbon/navigation-ribbon.component";
+import { BreadCrumbCollectorService } from "../../../../../../services/shared/bread-crumb-collector.service";
 
 @Component({
 	selector: "app-render-modules",
@@ -21,6 +26,9 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 	public modules: Module[];
 	public content: Content;
 	private modulesWithoutFilter: Module[];
+	public navigationRibbonConfig: NavigationRibbonConfig = {
+		rootUrl: "/modules/module/0",
+	};
 
 	constructor(
 		private router: Router,
@@ -29,7 +37,8 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 		private contentsService: ContentsService,
 		private formBuilder: FormBuilder,
 		private modalService: ModalService,
-		private shareDataService: ShareDataService
+		private shareDataService: ShareDataService,
+		private breadCrumbCollectorService: BreadCrumbCollectorService
 	) {
 		this.modules = [];
 		this.content = null;
@@ -64,13 +73,21 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 			this.content = await this.contentsService.getContentOfModule(
 				this.moduleId
 			);
-			console.info("Content: ", this.content);
 		}
 
 		this.modulesWithoutFilter = this.modules;
 	}
 
+	private setupBreadCrumbCollector(module: Module) {
+		this.breadCrumbCollectorService.collect({
+			key: module.id.toString(),
+			label: module == undefined || module == null ? " " : module.title,
+			toNavigate: `/modules/module/${module.id}`,
+		});
+	}
+
 	public enterModule(module: Module): void {
+		this.setupBreadCrumbCollector(module);
 		this.router.navigate([`/modules/module/${module.id}`]);
 	}
 
@@ -136,5 +153,7 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.content = null;
 		this.modules = [];
+		this.breadCrumbCollectorService.restartCollection();
+		this.breadCrumbCollectorService = null;
 	}
 }

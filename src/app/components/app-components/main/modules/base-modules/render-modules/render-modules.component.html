@@ -31,6 +31,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12">
+            <navigation-ribbon [config]="navigationRibbonConfig"></navigation-ribbon>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngFor="let module of modules; let i = index">
             <square-pill-button (clickIconCorner)="openModal($event)" (clickPill)="enterModule($event)" [pillMode]="2"
                 [pillIcon]="'fa fa-pencil'" [module]="module">

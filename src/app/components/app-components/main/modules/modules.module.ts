@@ -14,12 +14,14 @@ import { RenderModulesComponent } from "./base-modules/render-modules/render-mod
 import { SquarePillButtonComponent } from "../../../shared/square-pill-button/square-pill-button.component";
 import { ComponentsModule } from "../../../components.module";
 import { FormModulesComponent } from "./base-modules/form-modules/form-modules.component";
+import { NavigationRibbonComponent } from "../../../shared/navigation-ribbon/navigation-ribbon.component";
 
 @NgModule({
 	declarations: [
 		BaseModulesComponent,
 		RenderModulesComponent,
 		SquarePillButtonComponent,
+		NavigationRibbonComponent,
 		FormModulesComponent,
 	],
 	entryComponents: [FormModulesComponent],

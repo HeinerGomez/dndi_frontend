@@ -1,0 +1,23 @@
+<div class="cointainer_navigation_ribbon mt-3" divider_bottom>
+    <div class="wrapper-ribbon">
+        <div class="box-back">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true" (click)="backNavigation()"></i>
+        </div>
+        <div class="spaced-box"></div>
+        <div class="regular-box">
+            <span (click)="navigateToHome()">Home</span>
+        </div>
+        <div class="spaced-box">
+            <span>/</span>
+        </div>
+        <div class="ribbon" *ngFor="let item of data; let i = index">
+            <div class="regular-box">
+                <span
+                    (click)="navigateTo(item)">{{(item.label.length > 15) ? ((item.label | slice:0:15) + '..') : item.label}}</span>
+            </div>
+            <div class="spaced-box" *ngIf="(i < (data.length - 1))">
+                <span>/</span>
+            </div>
+        </div>
+    </div>
+</div>
