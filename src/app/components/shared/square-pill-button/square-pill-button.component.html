@@ -12,9 +12,21 @@
         </div>
     </div>
 
-    <div *ngSwitchCase="3" class="layout-relative">
+    <div *ngSwitchCase="3" class="layout-relative invested-color">
+        <div class="layout-icon-corner invested-color-text" (click)="handleClickIconCorner()">
+            <i [class]="pillIcon"></i>
+        </div>
         <div class="layout-text-with-option invested-color" (click)="handleClickPill()">
             <span>{{ content.title }}</span>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="4" class="layout-relative">
+        <div class="layout-icon-corner" (click)="handleClickIconCorner()">
+            <i [class]="pillIcon"></i>
+        </div>
+        <div class="layout-text-with-option" (click)="handleClickPill()">
+            <span>{{ disease.name }}</span>
         </div>
     </div>
 

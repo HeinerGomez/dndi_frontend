@@ -29,6 +29,12 @@ const routes: Routes = [
 			),
 		data: { breadcrumbs: "Generador de contenidos" },
 	},
+	{
+		path: "diseases",
+		loadChildren: () =>
+			import("./diseases/diseases.module").then((m) => m.DiseasesModule),
+		data: { breadcrumbs: "Enfermedades" },
+	},
 	/*{
 		path: 'request-coupons',
 		loadChildren: () => import('./coupons/coupons.module').then(m => m.CouponsModule),

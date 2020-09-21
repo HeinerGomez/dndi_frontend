@@ -20,8 +20,6 @@ import { NavigationRibbonComponent } from "../../../shared/navigation-ribbon/nav
 	declarations: [
 		BaseModulesComponent,
 		RenderModulesComponent,
-		SquarePillButtonComponent,
-		NavigationRibbonComponent,
 		FormModulesComponent,
 	],
 	entryComponents: [FormModulesComponent],

@@ -42,7 +42,8 @@
             </square-pill-button>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngIf="content">
-            <square-pill-button [pillMode]="3" (clickPill)="navigateToGenerateContent($event)" [content]="content">
+            <square-pill-button [pillMode]="3" [pillIcon]="'fa fa-times'"
+                (clickPill)="navigateToGenerateContent($event)" (clickIconCorner)="delete($event)" [content]="content">
             </square-pill-button>
         </div>
         <div class="col-6 col-sm-4 col-lg-2 mt-5" ngbDropdown placement="top-right" #dropOptions="ngbDropdown"

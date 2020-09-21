@@ -5,3 +5,8 @@ export abstract class Model {
 
 	static deserializeFromData(data: any): any {}
 }
+
+export interface Pivot {
+	masterId: number;
+	slaveId: number;
+}

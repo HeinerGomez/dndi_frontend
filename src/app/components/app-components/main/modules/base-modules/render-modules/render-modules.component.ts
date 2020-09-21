@@ -14,6 +14,7 @@ import {
 	NavigationRibbonConfig,
 } from "../../../../../shared/navigation-ribbon/navigation-ribbon.component";
 import { BreadCrumbCollectorService } from "../../../../../../services/shared/bread-crumb-collector.service";
+import { NotificationsService } from "../../../../../../services/shared/notifications.service";
 
 @Component({
 	selector: "app-render-modules",
@@ -38,7 +39,8 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 		private formBuilder: FormBuilder,
 		private modalService: ModalService,
 		private shareDataService: ShareDataService,
-		private breadCrumbCollectorService: BreadCrumbCollectorService
+		private breadCrumbCollectorService: BreadCrumbCollectorService,
+		private notificationsService: NotificationsService
 	) {
 		this.modules = [];
 		this.content = null;
@@ -110,6 +112,19 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 
 	public getcontrol(control: string) {
 		return this.reactiveForm.get(control);
+	}
+
+	public async delete(content: Content) {
+		const contentDeleted: Content = await this.contentsService.deleteContent(
+			content.id
+		);
+
+		this.notificationsService.success({
+			title: "Contenido eliminado exitosamente",
+			message: `El Contenido: ${contentDeleted.title}, fue eliminado con exito!`,
+		});
+
+		this.renderView();
 	}
 
 	public openModal(module: Module): void {

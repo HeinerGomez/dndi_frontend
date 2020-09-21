@@ -56,4 +56,12 @@ export class ContentsService {
 			.toPromise();
 		return new Content(response.data);
 	}
+
+	public async deleteContent(contentId: number) {
+		const response: any = await this.http
+			.delete(`${environment.apiURL}/contents/${contentId}`)
+			.toPromise();
+
+		return new Content(response.data);
+	}
 }
