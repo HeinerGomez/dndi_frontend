@@ -25,6 +25,8 @@ export class FormModulesComponent implements OnInit {
 	public urlImage: any;
 	public titleForm: string;
 
+	public isLoading: boolean = false;
+
 	constructor(
 		private modalDataService: ModalDataService,
 		private formBuilder: FormBuilder,
@@ -133,6 +135,7 @@ export class FormModulesComponent implements OnInit {
 	}
 
 	public async save() {
+		this.isLoading = true;
 		const data = this.reactiveForm.value;
 		const transformData = Module.deserializeFromData(data);
 
@@ -146,7 +149,7 @@ export class FormModulesComponent implements OnInit {
 				message: `El módulo: ${moduleCreated.title}, fue creado con exito!`,
 			});
 
-			this.uploadImage(moduleCreated.id);
+			await this.uploadImage(moduleCreated.id);
 		} else {
 			const moduleUpdated: Module = await this.modulesService.updateModule(
 				transformData,
@@ -158,9 +161,10 @@ export class FormModulesComponent implements OnInit {
 				message: `El módulo: ${moduleUpdated.title}, fue actualizado con exito!`,
 			});
 
-			this.uploadImage(moduleUpdated.id);
+			await this.uploadImage(moduleUpdated.id);
 		}
 
+		this.isLoading = false;
 		this.modalService.emitData({ shouldReload: true });
 		this.modalService.close();
 	}

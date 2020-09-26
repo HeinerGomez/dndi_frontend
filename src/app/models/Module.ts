@@ -27,10 +27,6 @@ export class Module extends Model {
 		this._contentId = data["content_id"];
 		this._isContentLink = data["is_content_link"];
 		this._pathImage = data["path_image"];
-		if (this._pathImage != null) {
-			this._pathImage =
-				environment.imagesURl + this._pathImage.replace("public", "");
-		}
 		this._diseaseId = data["disease_id"];
 		this._languageId = data["language_id"];
 	}

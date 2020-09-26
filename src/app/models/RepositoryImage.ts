@@ -18,9 +18,6 @@ export class RepositoryImage extends Model {
 		this._id = data["id"];
 		this._title = data["title"];
 		this._path = data["path"];
-		if (this._path != null) {
-			this._path = environment.imagesURl + this._path.replace("public", "");
-		}
 		this._key = data["key"];
 	}
 
