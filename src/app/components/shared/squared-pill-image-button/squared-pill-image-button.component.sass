@@ -1,0 +1,58 @@
+/* standar's pill */
+
+$background-standar-pill: #E9ECEF
+$width-standar-pill: 200px
+$height-standar-pill: 200px
+$radius-standar-pill: 25px
+
+/* Colors */
+$dndiPrimary: #e84e0f
+
+/* Sizes */
+$size-icon-plus: ($width-standar-pill) * 0.45
+$size-icon-delete: ($width-standar-pill) * 0.2
+$size-text: ($width-standar-pill) * 0.13
+
+.square-pill-image
+    width: $width-standar-pill
+    height: $height-standar-pill
+    background-color: $background-standar-pill
+    border-radius: $radius-standar-pill
+
+.layout-relative
+    width: 100%
+    height: 100%
+    position: relative
+    border-radius: $radius-standar-pill
+    cursor: pointer
+
+.layout-icon-corner
+    width: 100%
+    height: 100%
+    position: absolute
+
+.layout-icon-corner > i
+    font-size: $size-icon-delete
+    color: $dndiPrimary
+    position: absolute
+    top: 0
+    right: 0
+    margin-right: 2px
+    margin-top: 2px
+    z-index: 999999
+    cursor: pointer
+
+.layout-image
+    width: 100%
+    height: 100%
+    position: absolute
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: $radius-standar-pill
+
+.layout-image > img
+    width: 100%
+    height: 100%
+    background-size: cover
+    border-radius: $radius-standar-pill

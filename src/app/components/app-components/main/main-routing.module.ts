@@ -35,6 +35,12 @@ const routes: Routes = [
 			import("./diseases/diseases.module").then((m) => m.DiseasesModule),
 		data: { breadcrumbs: "Enfermedades" },
 	},
+	{
+		path: "image-bank",
+		loadChildren: () =>
+			import("./image-bank/image-bank.module").then((m) => m.ImageBankModule),
+		data: { breadcrumbs: "Banco de imagenes" },
+	},
 	/*{
 		path: 'request-coupons',
 		loadChildren: () => import('./coupons/coupons.module').then(m => m.CouponsModule),

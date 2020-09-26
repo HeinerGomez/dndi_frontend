@@ -1,0 +1,56 @@
+<app-page-title [heading]="'Banco de imagenes'" [subheading]="'Aqui puedes crear todas las imagenes que necesites'"
+    [icon]="'fa fa-photo icon-gradient bg-dndi-primary'">
+</app-page-title>
+
+<div>
+    <div class="card mb-5">
+        <div class="card-header">Listado de imagenes</div>
+        <div class="card-body">
+            <div [formGroup]="reactiveForm" class="container">
+                <!-- Search Toolbar-->
+                <div class="row">
+                    <div class="col-6 mt-2">
+                        <div class="form-group mb-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-search mr-2"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" formControlName="searchTerm" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button (click)="searchImages()" [disabled]="getcontrol('searchTerm').invalid"
+                            class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                            data-style="expand-left">
+                            <span>
+                                Buscar
+                            </span>
+                        </button>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button (click)="restartSearch()" [disabled]="getcontrol('searchTerm').invalid"
+                            class="btn btn-lg btn-block btn-pill btn-outline-secondary btn-outline-2x ladda-button"
+                            data-style="expand-left">
+                            <i class="fa fa-refresh"></i>
+                            Limpiar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12 col-sm-6 col-lg-4 mt-5" *ngFor="let image of images">
+                        <squared-pill-image-button [image]="image" (clickPill)="openModal($event)">
+                        </squared-pill-image-button>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4 mt-5">
+                        <square-pill-button [pillMode]="1" [pillIcon]="'fa fa-plus'" (click)="openModal()">
+                        </square-pill-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
