@@ -42,8 +42,17 @@
 
                 <div class="row justify-content-center align-items-center">
                     <div class="col-12 col-sm-6 col-lg-4 mt-5" *ngFor="let image of images">
-                        <squared-pill-image-button [image]="image" (clickPill)="openModal($event)">
-                        </squared-pill-image-button>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-12">
+                                <squared-pill-image-button [image]="image" (clickPill)="openModal($event)">
+                                </squared-pill-image-button>
+                            </div>
+                            <div class="col-12">
+                                <div>
+                                    {{image.path}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-12 col-sm-6 col-lg-4 mt-5">

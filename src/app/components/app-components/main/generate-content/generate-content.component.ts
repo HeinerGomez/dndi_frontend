@@ -72,11 +72,7 @@ export class GenerateContentComponent implements OnInit {
 			linkContentsIds: null,
 			content: [
 				this.content == null ? "" : this.content.content,
-				[
-					Validators.required,
-					Validators.minLength(5),
-					Validators.maxLength(100),
-				],
+				[Validators.required],
 			],
 		});
 	}
