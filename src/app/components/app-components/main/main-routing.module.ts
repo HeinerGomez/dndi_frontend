@@ -49,6 +49,14 @@ const routes: Routes = [
 			),
 		data: { breadcrumbs: "Glosario de palabras" },
 	},
+	{
+		path: "self-evaluations",
+		loadChildren: () =>
+			import("./self-evaluations/self-evaluations.module").then(
+				(m) => m.SelfEvaluationsModule
+			),
+		data: { breadcrumbs: "Auto Evaluaciones" },
+	},
 ];
 
 @NgModule({
