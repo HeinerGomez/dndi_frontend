@@ -1,0 +1,32 @@
+<form [formGroup]="reactiveForm">
+    <div class="card mb-5">
+        <div class="card-header">Formulario</div>
+        <div class="card-body p-3">
+            <div class="row mt-5 ml-5">
+                <div class="col-md-6 form-group">
+                    <label for="title">Titulo de la palabra</label>
+                    <input formControlName="title" id="title" type="text" placeholder="Titulo" class="form-control">
+                </div>
+            </div>
+            <div class="row ml-5">
+                <div class="col-md-6 form-group">
+                    <label for="description">Descripción</label>
+                    <textarea formControlName="description" id="description" type="text"
+                        class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mt-5 justify-content-end">
+                <div class="col-4">
+                    <button (click)="save()" [disabled]="reactiveForm.invalid"
+                        class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                        data-style="expand-right">
+                        <span>
+                            Guardar Palabra
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

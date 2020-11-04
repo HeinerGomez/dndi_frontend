@@ -1,0 +1,63 @@
+<app-page-title [heading]="'Glosario de palabras'" [subheading]="'Aqui puedes crear todas las palabras que necesites'"
+    [icon]="'fa fa-book icon-gradient bg-dndi-primary'">
+</app-page-title>
+
+<div>
+    <div class="card mb-5">
+        <div class="card-header">Listado de palabras</div>
+        <div class="card-body">
+            <div [formGroup]="reactiveForm" class="container">
+                <!-- Search Toolbar-->
+                <div class="row">
+                    <div class="col-6 mt-2">
+                        <div class="form-group mb-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-search mr-2"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" formControlName="searchTerm" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button (click)="searchGlossaryWord()" [disabled]="getcontrol('searchTerm').invalid"
+                            class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                            data-style="expand-left">
+                            <span>
+                                Buscar
+                            </span>
+                        </button>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button (click)="restartSearch()" [disabled]="getcontrol('searchTerm').invalid"
+                            class="btn btn-lg btn-block btn-pill btn-outline-secondary btn-outline-2x ladda-button"
+                            data-style="expand-left">
+                            <i class="fa fa-refresh"></i>
+                            Limpiar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngFor="let glossaryWord of glossaryWords; let i = index">
+                        <div class="square-pill">
+                            <div class="layout-relative">
+                                <div class="layout-icon-corner" (click)="delete(glossaryWord)">
+                                    <i [class]="'fa fa-times'"></i>
+                                </div>
+                                <div class="layout-text-with-option" (click)="openModal(glossaryWord)">
+                                    <span>{{ glossaryWord.title }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2 mt-5">
+                        <square-pill-button (click)="openModal()" [pillMode]="1" [pillIcon]="'fa fa-plus'">
+                        </square-pill-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

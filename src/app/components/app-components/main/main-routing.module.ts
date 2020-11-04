@@ -41,21 +41,14 @@ const routes: Routes = [
 			import("./image-bank/image-bank.module").then((m) => m.ImageBankModule),
 		data: { breadcrumbs: "Banco de imagenes" },
 	},
-	/*{
-		path: 'request-coupons',
-		loadChildren: () => import('./coupons/coupons.module').then(m => m.CouponsModule),
-		data: {breadcrumbs: 'Coupons'}
-	},
 	{
-		path: 'redeem-coupon',
-		component: RedeemCouponComponent,
-		data: {breadcrumbs: 'Redeem Coupon'}
+		path: "glossary-word",
+		loadChildren: () =>
+			import("./glossary-word/glossary-word.module").then(
+				(m) => m.GlossaryWordModule
+			),
+		data: { breadcrumbs: "Glosario de palabras" },
 	},
-	{
-		path: 'settings',
-		loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
-		data: {breadcrumbs: 'Settings'}
-	},*/
 ];
 
 @NgModule({
