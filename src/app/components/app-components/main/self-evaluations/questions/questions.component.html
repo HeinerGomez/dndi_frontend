@@ -1,10 +1,11 @@
-<app-page-title [heading]="'Auto evaluaciones'" [subheading]="'Aqui puedes crear las auto evaluaciones que necesites'"
+<app-page-title [heading]="'Preguntas'"
+    [subheading]="'Aqui puedes crear las preguntas necesarias a una auto evaluacion'"
     [icon]="'fa fa-graduation-cap icon-gradient bg-dndi-primary'">
 </app-page-title>
 
 <div>
     <div class="card mb-5">
-        <div class="card-header">Listado de auto evaluaciones</div>
+        <div class="card-header">Listado de preguntas</div>
         <div class="card-body">
             <div [formGroup]="reactiveForm" class="container">
                 <!-- Search Toolbar-->
@@ -22,7 +23,7 @@
                         </div>
                     </div>
                     <div class="col-2 mt-2">
-                        <button (click)="searchSelfEvaluations()" [disabled]="getcontrol('searchTerm').invalid"
+                        <button (click)="searchQuestions()" [disabled]="getcontrol('searchTerm').invalid"
                             class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
                             data-style="expand-left">
                             <span>
@@ -41,15 +42,14 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-6 col-sm-4 col-lg-2 mt-5"
-                        *ngFor="let selfEvaluation of selfEvaluations; let i = index">
-                        <div class="square-pill" (click)="enterToEvaluation(selfEvaluation)">
+                    <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngFor="let question of questions; let i = index">
+                        <div class="square-pill">
                             <div class="layout-relative">
-                                <div class="layout-icon-corner" (click)="openModal(selfEvaluation)">
+                                <div class="layout-icon-corner" (click)="openModal(question)">
                                     <i [class]="'fa fa-pencil'"></i>
                                 </div>
                                 <div class="layout-text-with-option">
-                                    <span>{{ selfEvaluation.name }}</span>
+                                    <span>{{ question.name }}</span>
                                 </div>
                             </div>
                         </div>

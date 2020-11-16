@@ -5,6 +5,8 @@ import { ModalService } from "../../../../../services/shared/modal.service";
 import { NotificationsService } from "../../../../../services/shared/notifications.service";
 import { SelfEvaluationsService } from "../../../../../services/app-services/self-evaluations.service";
 import { FormSelfEvaluationsComponent } from "../form-self-evaluations/form-self-evaluations.component";
+import { Router } from "@angular/router";
+import { ShareDataService } from "../../../../../services/shared/share-data.service";
 
 @Component({
 	selector: "app-self-evaluations-list",
@@ -19,7 +21,9 @@ export class SelfEvaluationsListComponent implements OnInit {
 	constructor(
 		private modalService: ModalService,
 		private formBuilder: FormBuilder,
-		private selfEvaluationsService: SelfEvaluationsService
+		private selfEvaluationsService: SelfEvaluationsService,
+		private router: Router,
+		private shareDataService: ShareDataService
 	) {
 		this.selfEvaluations = [];
 		this.selfEvaluationsWithoutFilter = [];
@@ -86,5 +90,10 @@ export class SelfEvaluationsListComponent implements OnInit {
 				this.modalService.resetEmitData();
 			}
 		});
+	}
+
+	public enterToEvaluation(selfEvaluation: SelfEvaluation) {
+		this.shareDataService.data = { selfEvaluation };
+		this.router.navigate(["/self-evaluations/questions"]);
 	}
 }

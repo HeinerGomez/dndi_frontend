@@ -12,10 +12,17 @@ import { ComponentsModule } from "../../../components.module";
 import { ModalService } from "../../../../services/shared/modal.service";
 import { SelfEvaluationsListComponent } from "./self-evaluations-list/self-evaluations-list.component";
 import { FormSelfEvaluationsComponent } from "./form-self-evaluations/form-self-evaluations.component";
+import { QuestionsComponent } from "./questions/questions.component";
+import { FormQuestionComponent } from "./form-question/form-question.component";
 
 @NgModule({
-	declarations: [SelfEvaluationsListComponent, FormSelfEvaluationsComponent],
-	entryComponents: [FormSelfEvaluationsComponent],
+	declarations: [
+		SelfEvaluationsListComponent,
+		FormSelfEvaluationsComponent,
+		QuestionsComponent,
+		FormQuestionComponent,
+	],
+	entryComponents: [FormSelfEvaluationsComponent, FormQuestionComponent],
 	imports: [
 		CommonModule,
 		FormsModule,

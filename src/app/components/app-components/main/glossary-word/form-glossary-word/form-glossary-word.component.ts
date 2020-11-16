@@ -47,7 +47,11 @@ export class FormGlossaryWordComponent implements OnInit {
 			status: [1, [Validators.required]],
 			description: [
 				isCreateMode ? "" : this.glossaryWord.description,
-				[Validators.required, Validators.minLength(5)],
+				[
+					Validators.required,
+					Validators.minLength(5),
+					Validators.maxLength(250),
+				],
 			],
 		});
 	}
