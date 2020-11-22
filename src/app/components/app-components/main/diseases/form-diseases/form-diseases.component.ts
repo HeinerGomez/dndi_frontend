@@ -93,10 +93,18 @@ export class FormDiseasesComponent implements OnInit {
 
 	public async save() {
 		const data = this.reactiveForm.value;
+		let dataToSend = {
+			name: data["name"],
+			languages: data["languages"],
+		};
+
+		if (data["description"] != null && data["description"] != "") {
+			dataToSend["description"] = data["description"];
+		}
 
 		if (this.isCreateMode()) {
 			const diseaseCreated: Disease = await this.diseasesServices.createDisease(
-				data
+				dataToSend
 			);
 
 			this.notificationsService.success({
@@ -105,7 +113,7 @@ export class FormDiseasesComponent implements OnInit {
 			});
 		} else {
 			const diseaseUpdated: Disease = await this.diseasesServices.updateDisease(
-				data,
+				dataToSend,
 				this.disease.id
 			);
 

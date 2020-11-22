@@ -18,9 +18,8 @@
             </div>
             <div class="row ml-5">
                 <div class="col-md-6 form-group">
-                    <label for="modulosEnlace">Enfermedades</label>
-                    <ng-select id="enfermedades" bindLabel="enfermedades" [multiple]="'true'"
-                        formControlName="languages">
+                    <label for="modulosEnlace">Lenguajes</label>
+                    <ng-select id="lenguajes" bindLabel="lenguajes" [multiple]="'true'" formControlName="languages">
                         <ng-option [value]="item.id" *ngFor="let item of languages">{{ item.name }}
                         </ng-option>
                     </ng-select>
