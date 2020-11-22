@@ -35,9 +35,9 @@
                                 <td class="col-2">
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" formControlName="isValid" class="custom-control-input"
-                                            id="isValidSwitch-{{i}}" #active>
+                                            id="isValidSwitch-{{i}}">
                                         <label class="custom-control-label"
-                                            for="isValidSwitch-{{i}}">{{active.checked ? 'Activo' : 'In activo'}}</label>
+                                            for="isValidSwitch-{{i}}">{{isCorrectAnswerReactiveForm(i) ? 'Activo' : 'In Activo'}}</label>
                                     </div>
                                 </td>
                                 <td class="col-2 text-center">

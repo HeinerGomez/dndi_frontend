@@ -88,6 +88,7 @@ export class FormQuestionComponent implements OnInit {
 			this.currentMode = modes.CREATE;
 		} else {
 			this.question = params.question;
+			console.log("Question: ", this.question);
 			this.answers = this.question.answers;
 			this.currentMode = modes.UPDATE;
 		}
@@ -160,7 +161,7 @@ export class FormQuestionComponent implements OnInit {
 						id: [answer != null ? answer.id : this.lastRow],
 						name: [answer != null ? answer.name : "", [Validators.required]],
 						tag: [answer != null ? answer.tag : "", [Validators.required]],
-						isValid: [false, [Validators.required]],
+						isValid: [answer.isValid],
 					})
 				);
 			} else {
@@ -181,5 +182,10 @@ export class FormQuestionComponent implements OnInit {
 			this.reactiveForm.get("dataAnswer").reset();
 			this.lastRow = 1;
 		}
+	}
+
+	public isCorrectAnswerReactiveForm(index: number): boolean {
+		const answer = this.reactiveForm.get("dataAnswer").get(index.toString());
+		return answer.get("isValid").value;
 	}
 }

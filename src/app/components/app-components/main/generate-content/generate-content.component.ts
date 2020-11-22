@@ -29,7 +29,31 @@ export class GenerateContentComponent implements OnInit {
 		defaultFontSize: "",
 		fonts: [{ class: "arial", name: "Arial" }],
 		sanitize: true,
-		toolbarHiddenButtons: [[], ["insertImage", "insertVideo"]],
+		toolbarHiddenButtons: [
+			[
+				"strikeThrough",
+				"subscript",
+				"superscript",
+				"justifyLeft",
+				"justifyCenter",
+				"justifyRight",
+				"justifyFull",
+				"outdent",
+				"insertUnorderedList",
+				"insertOrderedList",
+				"heading",
+				"fontName",
+			],
+			[
+				"insertImage",
+				"insertVideo",
+				"fontSize",
+				"textColor",
+				"backgroundColor",
+				"customClasses",
+				"toggleEditorMode",
+			],
+		],
 	};
 
 	public content: Content = null;
