@@ -15,12 +15,16 @@ import { SquarePillButtonComponent } from "../../../shared/square-pill-button/sq
 import { ComponentsModule } from "../../../components.module";
 import { FormModulesComponent } from "./base-modules/form-modules/form-modules.component";
 import { NavigationRibbonComponent } from "../../../shared/navigation-ribbon/navigation-ribbon.component";
+import { RenderDiseasesComponent } from './render-diseases/render-diseases.component';
+import { RenderLanguagesComponent } from './render-languages/render-languages.component';
 
 @NgModule({
 	declarations: [
 		BaseModulesComponent,
 		RenderModulesComponent,
 		FormModulesComponent,
+		RenderDiseasesComponent,
+		RenderLanguagesComponent,
 	],
 	entryComponents: [FormModulesComponent],
 	imports: [

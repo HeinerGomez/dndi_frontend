@@ -9,9 +9,9 @@ import { Module } from "../../models/Module";
 export class ModulesService {
 	constructor(private http: HttpClient) {}
 
-	public async getRootModules() {
+	public async getRootModules(languageId: number) {
 		const response = await this.http
-			.get(`${environment.apiURL}/rootModules`)
+			.get(`${environment.apiURL}/rootModules/${languageId}`)
 			.toPromise();
 
 		const data: any[] = response["data"];

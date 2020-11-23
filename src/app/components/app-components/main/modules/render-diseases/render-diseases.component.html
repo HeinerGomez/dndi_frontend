@@ -1,0 +1,43 @@
+<div>
+    <div [formGroup]="reactiveForm" class="container">
+        <!-- Search Toolbar-->
+        <div class="row">
+            <div class="col-6 mt-2">
+                <div class="form-group mb-0">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-search mr-2"></i>
+                            </span>
+                        </div>
+                        <input class="form-control" formControlName="searchTerm" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 mt-2">
+                <button (click)="searchDiseases()" [disabled]="getcontrol('searchTerm').invalid"
+                    class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                    data-style="expand-left">
+                    <span>
+                        Buscar
+                    </span>
+                </button>
+            </div>
+            <div class="col-2 mt-2">
+                <button (click)="restartSearch()" [disabled]="getcontrol('searchTerm').invalid"
+                    class="btn btn-lg btn-block btn-pill btn-outline-secondary btn-outline-2x ladda-button"
+                    data-style="expand-left">
+                    <i class="fa fa-refresh"></i>
+                    Limpiar
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngFor="let disease of diseases">
+                <square-pill-button [pillMode]="4" (clickPill)="enterDisease($event)" [disease]="disease">
+                </square-pill-button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ import {
 } from "../../../../../shared/navigation-ribbon/navigation-ribbon.component";
 import { BreadCrumbCollectorService } from "../../../../../../services/shared/bread-crumb-collector.service";
 import { NotificationsService } from "../../../../../../services/shared/notifications.service";
+import { Language } from "../../../../../../models/Language";
 
 @Component({
 	selector: "app-render-modules",
@@ -24,6 +25,7 @@ import { NotificationsService } from "../../../../../../services/shared/notifica
 export class RenderModulesComponent implements OnInit, OnDestroy {
 	public reactiveForm: FormGroup;
 	public moduleId: number;
+	private language: Language;
 	public modules: Module[];
 	public content: Content;
 	private modulesWithoutFilter: Module[];
@@ -48,6 +50,8 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.reactiveForm = this.defineReactiveForm();
+		const data = this.shareDataService.data;
+		this.language = data["language"];
 		this.route.params.subscribe((params) => {
 			this.moduleId = parseInt(params["id"]);
 			this.renderView();
@@ -69,7 +73,7 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 		}
 
 		if (this.moduleId == 0) {
-			this.modules = await this.modulesService.getRootModules();
+			this.modules = await this.modulesService.getRootModules(this.language.id);
 		} else {
 			this.modules = await this.modulesService.getChildModules(this.moduleId);
 			this.content = await this.contentsService.getContentOfModule(
