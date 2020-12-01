@@ -99,9 +99,12 @@ export class FormQuestionComponent implements OnInit {
 	}
 
 	public async save() {
-		const dataAnswer: string = JSON.stringify(
-			this.reactiveForm.value["dataAnswer"]
-		);
+		let formDataAnswer = this.reactiveForm.value["dataAnswer"];
+		formDataAnswer["is_valid"] = formDataAnswer["isValid"];
+
+		delete formDataAnswer["isValid"];
+
+		const dataAnswer: string = JSON.stringify(formDataAnswer);
 
 		const dataToSend = {
 			name: this.reactiveForm.get("name").value,

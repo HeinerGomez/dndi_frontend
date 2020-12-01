@@ -144,6 +144,7 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 				isForCreate: module ? false : true,
 				module: module ? module : null,
 				parentModuleId: this.moduleId,
+				language: this.language,
 			},
 		});
 

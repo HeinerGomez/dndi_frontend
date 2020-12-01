@@ -17,7 +17,7 @@ export class Answer extends Model {
 		this._id = data["id"];
 		this._name = data["name"];
 		this._tag = data["tag"];
-		this._isValid = data["isValid"];
+		this._isValid = data["is_valid"];
 	}
 
 	public deserialize(): any {
