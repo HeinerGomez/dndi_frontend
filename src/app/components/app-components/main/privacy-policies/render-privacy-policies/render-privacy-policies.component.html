@@ -1,0 +1,79 @@
+<app-page-title [heading]="'Políticas de Privacidad'"
+    [subheading]="'Aqui puedes configurar diferentes políticas de privacidad, incluyendo los términos y condiciones.'"
+    [icon]="'vsm-icon pe-7s-news-paper'">
+</app-page-title>
+<div [formGroup]="reactiveForm">
+    <div class="card mb-5">
+        <div class="card-header">Listado de politicas</div>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 mt-2">
+                        <div class="form-group mb-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-search mr-2"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" formControlName="searchTerm" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button (click)="searchTerm()" [disabled]="getcontrol('searchTerm').invalid"
+                            class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                            data-style="expand-left">
+                            <span>
+                                Buscar
+                            </span>
+                        </button>
+                    </div>
+                    <div class="col-2 mt-2">
+                        <button (click)="restartSearch()" [disabled]="getcontrol('searchTerm').invalid"
+                            class="btn btn-lg btn-block btn-pill btn-outline-secondary btn-outline-2x ladda-button"
+                            data-style="expand-left">
+                            <i class="fa fa-refresh"></i>
+                            Limpiar
+                        </button>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let termCondition of termAndConditions; let i = index">
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>{{ termCondition.name }}</td>
+                                <td>{{ termCondition.typeAsName }}</td>
+                                <td>{{ termCondition.isPublishAsName }}</td>
+                                <td><i class="fa fa-pencil icon-md" (click)="openModal(termCondition)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Botón de Guardar  -->
+                <div class="row justify-content-end">
+                    <div class="col-12 col-sm-12 col-md-4">
+                        <button (click)="openModal()"
+                            class="btn btn-lg btn-block btn-pill btn-outline-success btn-outline-2x ladda-button"
+                            data-style="expand-left">
+                            <span>
+                                Nueva Política
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

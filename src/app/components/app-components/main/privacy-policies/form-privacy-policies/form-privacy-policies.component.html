@@ -1,0 +1,51 @@
+<form [formGroup]="reactiveForm">
+    <div class="card mb-5">
+        <div class="card-header">Formulario</div>
+        <div class="card-body p-3">
+            <div class="row mt-2 justify-content-end" *ngIf="!isCreateMode()">
+                <div class="col-2">
+                    <i class="fa fa-trash float-right icon-deleted-form" (click)="delete()"></i>
+                </div>
+            </div>
+            <div class="row mt-5 ml-5">
+                <div class="col-md-6 form-group">
+                    <label for="title">Titulo</label>
+                    <input formControlName="name" id="title" type="text" placeholder="Titulo" class="form-control">
+                </div>
+            </div>
+            <div class="row ml-5">
+                <div class="col-md-6 form-group">
+                    <label for="tipo">Tipo</label>
+                    <ng-select id="tipo" bindLabel="Tipo" formControlName="type">
+                        <ng-option [value]="item.id" *ngFor="let item of typeTerms">{{ item.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row ml-5">
+                <div class="col-md-6 form-group">
+                    <input formControlName="isPublish" id="is_publish" type="checkbox">
+                    <label class="ml-2" for="is_publish">Publicar</label>
+                </div>
+            </div>
+            <div class="row ml-5 mr-5">
+                <div class="col-md-12 form-group">
+                    <label for="content">Contenido</label>
+                    <angular-editor formControlName="content" id="content" [config]="editorConfig"></angular-editor>
+                </div>
+            </div>
+            <div class="row mt-5 justify-content-end">
+                <div class="col-4">
+                    <button (click)="save()" [disabled]="reactiveForm.invalid"
+                        class="btn btn-lg btn-block btn-pill btn-outline-primary btn-outline-2x ladda-button"
+                        data-style="expand-right">
+                        <span>
+                            Guardar Política
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

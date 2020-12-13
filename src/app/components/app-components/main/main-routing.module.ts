@@ -57,6 +57,14 @@ const routes: Routes = [
 			),
 		data: { breadcrumbs: "Auto Evaluaciones" },
 	},
+	{
+		path: "privacy-policies",
+		loadChildren: () =>
+			import("./privacy-policies/privacy-policies.module").then(
+				(m) => m.PrivacyPoliciesModule
+			),
+		data: { breadcrumbs: "Políticas De Privacidad" },
+	},
 ];
 
 @NgModule({
