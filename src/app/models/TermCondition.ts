@@ -55,8 +55,8 @@ export class TermCondition extends Model {
 
 	public get typeAsName(): string {
 		return this._type == Type.CIVIL_LIABILITY
-			? "Politica de Privacidad"
-			: "Terminos y Condiciones";
+			? "Políticas de privacidad y manejo de datos"
+			: "política de responsabilidad civil";
 	}
 
 	public set type(value: Type) {
