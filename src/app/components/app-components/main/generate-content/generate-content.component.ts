@@ -7,6 +7,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Module } from "../../../../models/Module";
 import { ContentsService } from "../../../../services/app-services/contents.service";
 import { NotificationsService } from "../../../../services/shared/notifications.service";
+import { LinkMap } from "src/app/models/LinkMap";
+import { Constants } from "../../../../global/constants";
 
 @Component({
 	selector: "app-generate-content",
@@ -23,7 +25,7 @@ export class GenerateContentComponent implements OnInit {
 		width: "auto",
 		minWidth: "0",
 		translate: "yes",
-		placeholder: "Enter text here...",
+		placeholder: "Agrega tu contenido aquí",
 		defaultParagraphSeparator: "",
 		defaultFontName: "",
 		defaultFontSize: "",
@@ -62,6 +64,7 @@ export class GenerateContentComponent implements OnInit {
 	public moduleId: number;
 	private _isForCreate: boolean;
 	public possibleLinkModules: Module[];
+	public possibleLinkMaps: LinkMap[];
 
 	constructor(
 		private shareDataService: ShareDataService,
@@ -75,6 +78,7 @@ export class GenerateContentComponent implements OnInit {
 		this._isForCreate = this.shareDataService.data.isForCreate;
 		this.module = null;
 		this.possibleLinkModules = [];
+		this.possibleLinkMaps = Constants.LINK_MAPS;
 	}
 
 	ngOnInit() {
@@ -94,6 +98,7 @@ export class GenerateContentComponent implements OnInit {
 			moduleId: [this.moduleId, [Validators.required]],
 			moduleTitle: ["", [Validators.required]],
 			linkContentsIds: null,
+			linkMaps: null,
 			content: [
 				this.content == null ? "" : this.content.content,
 				[Validators.required],
@@ -118,6 +123,11 @@ export class GenerateContentComponent implements OnInit {
 
 		if (idsLinksModules.length > 0) {
 			this.reactiveForm.get("linkContentsIds").setValue(idsLinksModules);
+		}
+
+		const linkMaps: LinkMap[] = this.content.linkMaps;
+		if (linkMaps.length > 0) {
+			this.reactiveForm.get("linkMaps").setValue(linkMaps);
 		}
 	}
 
@@ -169,6 +179,18 @@ export class GenerateContentComponent implements OnInit {
 			data.linkContentsIds = dataForm["linkContentsIds"];
 		}
 		data.content = dataForm["content"];
+
+		if (dataForm["linkMaps"] != null && dataForm["linkMaps"].length > 0) {
+			data.link_maps = [];
+
+			for (let linkMap of dataForm["linkMaps"]) {
+				data.link_maps.push({
+					id: linkMap._id,
+					name: linkMap._name,
+					page_name: linkMap._pageName,
+				});
+			}
+		}
 
 		return data;
 	}

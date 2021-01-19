@@ -29,6 +29,23 @@ export class DiseasesService {
 		return { languages: languages };
 	}
 
+	public async getLanguagesOfDisease(diseaseId: number) {
+		const response = await this.http
+			.get(`${environment.apiURL}/disease/getLanguageOfDisease/${diseaseId}`)
+			.toPromise();
+
+		const data: any[] = response["data"];
+		const languages: Language[] = [];
+
+		if (data["languages"]) {
+			const languagesRaw: any[] = data["languages"];
+
+			languagesRaw.map((row) => languages.push(new Language(row)));
+		}
+
+		return { languages: languages };
+	}
+
 	public async getDiseases() {
 		const response = await this.http
 			.get(`${environment.apiURL}/diseases`)

@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="modulo">Modulo</label>
-                    <input id="modulo" formControlName="moduleTitle" type="text" placeholder="Titulo Modulo"
+                    <input id="modulo" formControlName="moduleTitle" disabled type="text" placeholder="Titulo Modulo"
                         class="form-control">
                 </div>
                 <div class="col-md-4 form-group">
@@ -21,6 +21,13 @@
                     <ng-select id="modulosEnlace" bindLabel="modulosEnlace" [multiple]="'true'"
                         formControlName="linkContentsIds">
                         <ng-option [value]="item.id" *ngFor="let item of possibleLinkModules">{{ item.title }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="link_maps">Enlaces a mapas</label>
+                    <ng-select id="link_maps" bindLabel="modulosEnlace" [multiple]="'true'" formControlName="linkMaps">
+                        <ng-option [value]="item" *ngFor="let item of possibleLinkMaps">{{ item.name }}
                         </ng-option>
                     </ng-select>
                 </div>

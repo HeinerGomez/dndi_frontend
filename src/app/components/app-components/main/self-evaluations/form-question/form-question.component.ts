@@ -59,7 +59,7 @@ export class FormQuestionComponent implements OnInit {
 					id: [1, []],
 					name: ["", [Validators.required]],
 					tag: ["", [Validators.required]],
-					isValid: [false, [Validators.required]],
+					is_valid: [false, [Validators.required]],
 				}),
 			]),
 			selfEvaluationId: [
@@ -99,12 +99,22 @@ export class FormQuestionComponent implements OnInit {
 	}
 
 	public async save() {
-		let formDataAnswer = this.reactiveForm.value["dataAnswer"];
-		formDataAnswer["is_valid"] = formDataAnswer["isValid"];
+		let formDataAnswer: any[] = this.reactiveForm.value["dataAnswer"];
 
-		delete formDataAnswer["isValid"];
+		// convierto el key "is_valid" de booleano a numerico
+		let counter = 0;
+		for (let dataAnswer of formDataAnswer) {
+			if (dataAnswer["is_valid"] === true) {
+				formDataAnswer[counter]["is_valid"] = 1;
+			} else {
+				formDataAnswer[counter]["is_valid"] = 0;
+			}
+			counter++;
+		}
 
 		const dataAnswer: string = JSON.stringify(formDataAnswer);
+
+		console.log("Data before send: ", dataAnswer);
 
 		const dataToSend = {
 			name: this.reactiveForm.get("name").value,
@@ -164,7 +174,7 @@ export class FormQuestionComponent implements OnInit {
 						id: [answer != null ? answer.id : this.lastRow],
 						name: [answer != null ? answer.name : "", [Validators.required]],
 						tag: [answer != null ? answer.tag : "", [Validators.required]],
-						isValid: [answer.isValid],
+						is_valid: [answer != null ? answer.isValid : false],
 					})
 				);
 			} else {
@@ -189,6 +199,6 @@ export class FormQuestionComponent implements OnInit {
 
 	public isCorrectAnswerReactiveForm(index: number): boolean {
 		const answer = this.reactiveForm.get("dataAnswer").get(index.toString());
-		return answer.get("isValid").value;
+		return answer.get("is_valid").value;
 	}
 }

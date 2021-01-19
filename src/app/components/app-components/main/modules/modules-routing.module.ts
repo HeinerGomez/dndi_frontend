@@ -13,7 +13,7 @@ const routes: Routes = [
 			{ path: "module/:id", component: RenderModulesComponent },
 			{ path: "render-diseases", component: RenderDiseasesComponent },
 			{
-				path: "render-languages/:languageId",
+				path: "render-languages/:diseaseId",
 				component: RenderLanguagesComponent,
 			},
 			{ path: "**", redirectTo: "render-diseases" },

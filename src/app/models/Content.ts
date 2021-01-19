@@ -1,9 +1,11 @@
 import { Model } from "./Model";
+import { LinkMap } from "./LinkMap";
 export class Content extends Model {
 	private _id: number;
 	private _title: string;
 	private _moduleId: number;
 	private _content: string;
+	private _linkMaps: LinkMap[];
 
 	constructor(data?: any) {
 		super();
@@ -17,6 +19,16 @@ export class Content extends Model {
 		this._title = data["title"];
 		this._moduleId = data["module_id"];
 		this._content = data["content"];
+
+		if (data["link_maps"]) {
+			data["link_maps"] = JSON.parse(data["link_maps"]);
+
+			if (data["link_maps"].length > 0) {
+				this._linkMaps = data["link_maps"].map((row: any) => new LinkMap(row));
+			}
+		} else {
+			this._linkMaps = [];
+		}
 	}
 
 	public deserialize() {
@@ -25,6 +37,7 @@ export class Content extends Model {
 			title: this._title,
 			moduleId: this._moduleId,
 			content: this._content,
+			linkMaps: this._linkMaps,
 		};
 	}
 
@@ -58,5 +71,13 @@ export class Content extends Model {
 
 	public set content(value: string) {
 		this._content = value;
+	}
+
+	public get linkMaps(): LinkMap[] {
+		return this._linkMaps;
+	}
+
+	public set linkMaps(value: LinkMap[]) {
+		this._linkMaps = value;
 	}
 }

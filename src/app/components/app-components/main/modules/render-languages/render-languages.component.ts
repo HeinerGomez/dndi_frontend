@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Language } from "../../../../../models/Language";
 import { DiseasesService } from "../../../../../services/app-services/diseases.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ShareDataService } from "../../../../../services/shared/share-data.service";
 
 @Component({
@@ -11,17 +11,25 @@ import { ShareDataService } from "../../../../../services/shared/share-data.serv
 })
 export class RenderLanguagesComponent implements OnInit {
 	public languages: Language[];
+	private diseaseId: number;
 
 	constructor(
 		private diseasesServices: DiseasesService,
 		private router: Router,
-		private shareDataServices: ShareDataService
+		private shareDataServices: ShareDataService,
+		private route: ActivatedRoute
 	) {
 		this.languages = [];
 	}
 
 	async ngOnInit() {
-		const dependencies = await this.diseasesServices.getDependencies();
+		this.route.params.subscribe((params) => {
+			this.diseaseId = params["diseaseId"];
+		});
+
+		const dependencies = await this.diseasesServices.getLanguagesOfDisease(
+			this.diseaseId
+		);
 		this.languages = dependencies["languages"];
 	}
 

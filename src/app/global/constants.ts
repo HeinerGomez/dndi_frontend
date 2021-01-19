@@ -1,79 +1,94 @@
+import { LinkMap } from "../models/LinkMap";
 export class Constants {
-
 	public static PERMISSIONS: any = {
-
 		// Permiso para acceder a un módulo
-		access: 'access',
+		access: "access",
 
 		// Permiso para listar registros
-		read: 'read',
+		read: "read",
 
 		// Permiso para insertar registros
-		create: 'create',
+		create: "create",
 
 		// Permiso para actualizar registros
-		update: 'update',
+		update: "update",
 
 		// Permiso para eliminar registros
-		delete: 'delete',
+		delete: "delete",
 
 		// Permiso para activar/inactivar
-		activateDeactivate: 'activate-deactivate',
+		activateDeactivate: "activate-deactivate",
 
 		// Permiso para importar
-		import: 'import',
+		import: "import",
 
 		// Permiso para exportar
-		export: 'export',
+		export: "export",
 
 		// Permiso para imprimir
-		print: 'print',
+		print: "print",
 
 		// Permiso para aceptar términos y condiciones
-		agreeTermsAndConditions: 'agree-terms-conditions',
+		agreeTermsAndConditions: "agree-terms-conditions",
 
 		// Permiso para crear reportes
-		createReport: 'create_report',
+		createReport: "create_report",
 
 		// Permiso para reportar positivo
-		reportPositive: 'report_positive',
+		reportPositive: "report_positive",
 
 		// Permiso para reportar informativo
-		reportInfo: 'report_info',
+		reportInfo: "report_info",
 
 		// Permiso para reportar negativo
-		reportNegative: 'report_negative',
+		reportNegative: "report_negative",
 
 		// Permiso para aprobar
-		approve: 'approve',
+		approve: "approve",
 
 		// Permiso para rechazar
-		reject: 'reject',
+		reject: "reject",
 
 		// Permiso para visualizar
-		visualize: 'visualize',
+		visualize: "visualize",
 
 		// Permiso para autorizar
-		authorize: 'authorize',
+		authorize: "authorize",
 
 		// Permiso para cambiar contraseña
-		changePassword: 'change_password',
+		changePassword: "change_password",
 
 		// Permiso para cambiar foto
-		changePicture: 'change_picture',
+		changePicture: "change_picture",
 
 		// Permiso para asignar
-		assign: 'assign',
+		assign: "assign",
 
 		// Permiso para agregar
-		add: 'add',
+		add: "add",
 
 		// Permiso para quitar
-		remove: 'remove',
+		remove: "remove",
 
 		// Permiso para responder
-		reply: 'reply',
-
+		reply: "reply",
 	};
 
+	public static LINK_MAPS: LinkMap[] = [
+		new LinkMap({
+			id: 1,
+			name: "Mapa asociación de pacientes",
+			page_name: "mapAsociacionPacientes",
+		}),
+		new LinkMap({
+			id: 2,
+			name: "Mapa datos epidemiologicos",
+			page_name: "mapDatosEpidemiologicos",
+		}),
+		new LinkMap({
+			id: 3,
+			name: "Mapa de distribución de vectores",
+			page_name: "mapDistribucionVectores",
+		}),
+	];
 }

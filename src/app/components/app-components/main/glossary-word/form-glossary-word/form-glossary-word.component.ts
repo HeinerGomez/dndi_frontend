@@ -42,7 +42,7 @@ export class FormGlossaryWordComponent implements OnInit {
 			id: [isCreateMode ? null : this.glossaryWord.id],
 			title: [
 				isCreateMode ? "" : this.glossaryWord.title,
-				[Validators.required, Validators.minLength(5)],
+				[Validators.required, Validators.minLength(2)],
 			],
 			status: [1, [Validators.required]],
 			description: [
