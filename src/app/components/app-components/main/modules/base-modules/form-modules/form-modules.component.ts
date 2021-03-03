@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ModulesService } from "../../../../../../services/app-services/modules.service";
 import { NotificationsService } from "../../../../../../services/shared/notifications.service";
 import { ModalService } from "../../../../../../services/shared/modal.service";
-import { Language } from "../../../../../../models/Language";
 
 export enum modes {
 	CREATE = 1,
@@ -21,7 +20,7 @@ export class FormModulesComponent implements OnInit {
 	private currentMode: modes;
 	private module: Module;
 	private parentModuleId: number;
-	private language: Language;
+	private languageId: number;
 	public reactiveForm: FormGroup;
 	private selectedFile: File;
 	public urlImage: any;
@@ -72,7 +71,7 @@ export class FormModulesComponent implements OnInit {
 				[Validators.required],
 			], // TODO temporal
 			languageId: [
-				isCreateMode ? this.language.id : this.module.languageId,
+				isCreateMode ? this.languageId : this.module.languageId,
 				[Validators.required],
 			], // TODO temporal
 		});
@@ -83,7 +82,7 @@ export class FormModulesComponent implements OnInit {
 		const params: any = data.params;
 
 		this.parentModuleId = parseInt(params.parentModuleId);
-		this.language = params.language;
+		this.languageId = params.languageId;
 
 		if (params.isForCreate) {
 			this.currentMode = modes.CREATE;

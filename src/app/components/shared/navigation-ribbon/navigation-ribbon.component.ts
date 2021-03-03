@@ -27,9 +27,14 @@ export class NavigationRibbonComponent implements OnInit {
 	}
 
 	public backNavigation(): void {
-		this.data.pop();
-		this.breadCrumbCollectorService.setCollection(this.data);
-		this.location.back();
+		let lastBreadCrumb = this.breadCrumbCollectorService.getLastBreadCrumb();
+		if (lastBreadCrumb == null) {
+			this.breadCrumbCollectorService.setCollection(this.data);
+			this.router.navigate([this.config.rootUrl]);
+		} else {
+			this.router.navigate([lastBreadCrumb.toNavigate]);
+			this.breadCrumbCollectorService.deleteLastBreadCrumb();
+		}
 	}
 
 	public navigateToHome(): void {
@@ -55,6 +60,8 @@ export class NavigationRibbonComponent implements OnInit {
 		}
 
 		this.data = newData;
+
+		console.info(this.data);
 		this.breadCrumbCollectorService.setCollection(this.data);
 	}
 }

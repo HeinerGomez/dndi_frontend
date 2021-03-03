@@ -5,15 +5,15 @@
         </div>
         <div class="spaced-box"></div>
         <div class="regular-box">
-            <span (click)="navigateToHome()">Home</span>
+            <span (click)="navigateToHome()">Enfermedades</span>
         </div>
         <div class="spaced-box">
             <span>/</span>
         </div>
         <div class="ribbon" *ngFor="let item of data; let i = index">
             <div class="regular-box">
-                <span
-                    (click)="navigateTo(item)">{{(item.label.length > 15) ? ((item.label | slice:0:15) + '..') : item.label}}</span>
+                <span (click)="navigateTo(item)">{{(item.label.length > 15) ? ((item.label | slice:0:15) + '..') :
+                    item.label}}</span>
             </div>
             <div class="spaced-box" *ngIf="(i < (data.length - 1))">
                 <span>/</span>

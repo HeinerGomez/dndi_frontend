@@ -5,6 +5,8 @@ import { ModalService } from "../../../../../services/shared/modal.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { NotificationsService } from "../../../../../services/shared/notifications.service";
 import { Router } from "@angular/router";
+import { NavigationRibbonConfig } from "../../../../shared/navigation-ribbon/navigation-ribbon.component";
+import { BreadCrumbCollectorService } from "../../../../../services/shared/bread-crumb-collector.service";
 
 @Component({
 	selector: "app-render-diseases",
@@ -15,11 +17,15 @@ export class RenderDiseasesComponent implements OnInit {
 	public reactiveForm: FormGroup;
 	public diseases: Disease[];
 	private diseasesWithoutFilter: Disease[];
+	public navigationRibbonConfig: NavigationRibbonConfig = {
+		rootUrl: "modules/render-diseases",
+	};
 
 	constructor(
 		private diseasesService: DiseasesService,
 		private formBuilder: FormBuilder,
-		private router: Router
+		private router: Router,
+		private breadCrumbCollectorService: BreadCrumbCollectorService
 	) {
 		this.diseases = [];
 		this.diseasesWithoutFilter = [];
@@ -63,6 +69,15 @@ export class RenderDiseasesComponent implements OnInit {
 	}
 
 	public enterDisease(disease: Disease) {
+		this.setupBreadCrumbCollector(disease);
 		this.router.navigate([`modules/render-languages/${disease.id}`]);
+	}
+
+	private setupBreadCrumbCollector(disease: Disease) {
+		this.breadCrumbCollectorService.collect({
+			key: disease.id.toString(),
+			label: disease == undefined || disease == null ? " " : disease.name,
+			toNavigate: `modules/render-languages/${disease.id}`,
+		});
 	}
 }

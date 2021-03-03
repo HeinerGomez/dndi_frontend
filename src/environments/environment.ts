@@ -5,8 +5,8 @@
 export const environment = {
 	production: false,
 	app: "dndi",
-	// apiURL: "http://127.0.0.1:7777/api",
-	apiURL: "http://dndi.us-east-2.elasticbeanstalk.com/api",
+	apiURL: "http://127.0.0.1:7777/api",
+	//apiURL: "http://dndi.us-east-2.elasticbeanstalk.com/api",
 };
 
 /*

@@ -62,7 +62,8 @@ export class GenerateContentComponent implements OnInit {
 	public reactiveForm: FormGroup;
 	public module: Module;
 	public moduleId: number;
-	private _isForCreate: boolean;
+	private contentId: number;
+	private _isForCreate: boolean = true;
 	public possibleLinkModules: Module[];
 	public possibleLinkMaps: LinkMap[];
 
@@ -74,19 +75,26 @@ export class GenerateContentComponent implements OnInit {
 		private notificationsService: NotificationsService,
 		private router: Router
 	) {
-		this.content = this.shareDataService.data.content;
-		this._isForCreate = this.shareDataService.data.isForCreate;
 		this.module = null;
 		this.possibleLinkModules = [];
 		this.possibleLinkMaps = Constants.LINK_MAPS;
 	}
 
 	ngOnInit() {
-		this.route.params.subscribe((params) => {
+		this.route.params.subscribe(async (params) => {
 			this.moduleId = parseInt(params["moduleId"]);
+			this.contentId = parseInt(params["contentId"]);
+
+			if (this.contentId === 0) {
+				this._isForCreate = true;
+			} else {
+				this._isForCreate = false;
+				this.content = await this.contentsService.getContent(this.contentId);
+			}
+
+			this.getDependencies();
+			this.reactiveForm = this.defineReactiveForm();
 		});
-		this.getDependencies();
-		this.reactiveForm = this.defineReactiveForm();
 	}
 
 	private defineReactiveForm(): FormGroup {
@@ -125,7 +133,8 @@ export class GenerateContentComponent implements OnInit {
 			this.reactiveForm.get("linkContentsIds").setValue(idsLinksModules);
 		}
 
-		const linkMaps: LinkMap[] = this.content.linkMaps;
+		const linkMaps: LinkMap[] =
+			this.content != null ? this.content.linkMaps : [];
 		if (linkMaps.length > 0) {
 			this.reactiveForm.get("linkMaps").setValue(linkMaps);
 		}
@@ -161,7 +170,9 @@ export class GenerateContentComponent implements OnInit {
 			});
 		}
 
-		this.router.navigate([`/modules/module/${this.moduleId}'`]);
+		this.router.navigate([
+			`/modules/module/${this.module.id}/${this.module.languageId}/${this.module.diseaseId}`,
+		]);
 	}
 
 	private transformData(): any {

@@ -49,7 +49,7 @@ export class RenderImageBankComponent implements OnInit {
 			const searchTermValue: string = searchTermControl.value;
 
 			this.images = this.imagesWithoutFilter.filter((image: RepositoryImage) =>
-				image.title.toLowerCase().startsWith(searchTermValue.toLowerCase())
+				image.key.toLowerCase().startsWith(searchTermValue.toLowerCase())
 			);
 		}
 	}

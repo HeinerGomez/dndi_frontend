@@ -10,7 +10,10 @@ const routes: Routes = [
 		path: "",
 		component: BaseModulesComponent,
 		children: [
-			{ path: "module/:id", component: RenderModulesComponent },
+			{
+				path: "module/:id/:languageId/:diseaseId",
+				component: RenderModulesComponent,
+			},
 			{ path: "render-diseases", component: RenderDiseasesComponent },
 			{
 				path: "render-languages/:diseaseId",

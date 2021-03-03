@@ -43,6 +43,14 @@ export class ContentsService {
 		return { module: module, possibleLinkModules: possibleLinkModules };
 	}
 
+	public async getContent(contentId: number) {
+		const response: any = await this.http
+			.get(`${environment.apiURL}/contents/${contentId}`)
+			.toPromise();
+
+		return new Content(response.data);
+	}
+
 	public async createContent(data: any) {
 		const response: any = await this.http
 			.post(`${environment.apiURL}/contents`, data)

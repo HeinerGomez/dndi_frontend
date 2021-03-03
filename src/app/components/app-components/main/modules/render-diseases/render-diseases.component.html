@@ -34,6 +34,12 @@
         </div>
 
         <div class="row">
+            <div class="col-12">
+                <navigation-ribbon [config]="navigationRibbonConfig"></navigation-ribbon>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-6 col-sm-4 col-lg-2 mt-5" *ngFor="let disease of diseases">
                 <square-pill-button [pillMode]="4" (clickPill)="enterDisease($event)" [disease]="disease">
                 </square-pill-button>

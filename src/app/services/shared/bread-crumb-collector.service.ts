@@ -35,6 +35,28 @@ export class BreadCrumbCollectorService {
 		);
 	}
 
+	public getLastBreadCrumb(): NavigationRibbonData {
+		if (this._navigationRibbonData.length > 1) {
+			return this._navigationRibbonData[this._navigationRibbonData.length - 2];
+		} else {
+			return null;
+		}
+	}
+
+	public deleteLastBreadCrumb() {
+		if (this._navigationRibbonData.length > 0) {
+			this._navigationRibbonData.pop();
+		}
+	}
+
+	public getFirstBreadCrumb(): NavigationRibbonData {
+		if (this._navigationRibbonData.length > 0) {
+			return this._navigationRibbonData[0];
+		} else {
+			return null;
+		}
+	}
+
 	public informCollection(): Observable<NavigationRibbonData[]> {
 		return this._gatherer.asObservable();
 	}

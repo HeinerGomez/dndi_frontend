@@ -22,7 +22,7 @@ const routes: Routes = [
 		data: { breadcrumbs: "Modulos" },
 	},
 	{
-		path: "generate-content/:moduleId",
+		path: "generate-content/:moduleId/:contentId",
 		loadChildren: () =>
 			import("./generate-content/generate-content.module").then(
 				(m) => m.GenerateContentModule

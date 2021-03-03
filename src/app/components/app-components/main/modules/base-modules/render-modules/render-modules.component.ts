@@ -25,12 +25,14 @@ import { Language } from "../../../../../../models/Language";
 export class RenderModulesComponent implements OnInit, OnDestroy {
 	public reactiveForm: FormGroup;
 	public moduleId: number;
+	private languageId: number;
 	private language: Language;
+	private diseaseId: number;
 	public modules: Module[];
 	public content: Content;
 	private modulesWithoutFilter: Module[];
 	public navigationRibbonConfig: NavigationRibbonConfig = {
-		rootUrl: "/modules/module/0",
+		rootUrl: "modules/render-diseases",
 	};
 
 	constructor(
@@ -50,10 +52,10 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.reactiveForm = this.defineReactiveForm();
-		const data = this.shareDataService.data;
-		this.language = data["language"];
 		this.route.params.subscribe((params) => {
 			this.moduleId = parseInt(params["id"]);
+			this.languageId = parseInt(params["languageId"]);
+			this.diseaseId = parseInt(params["diseaseId"]);
 			this.renderView();
 		});
 	}
@@ -73,7 +75,10 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 		}
 
 		if (this.moduleId == 0) {
-			this.modules = await this.modulesService.getRootModules(this.language.id);
+			this.modules = await this.modulesService.getRootModules(
+				this.languageId,
+				this.diseaseId
+			);
 		} else {
 			this.modules = await this.modulesService.getChildModules(this.moduleId);
 			this.content = await this.contentsService.getContentOfModule(
@@ -88,13 +93,15 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 		this.breadCrumbCollectorService.collect({
 			key: module.id.toString(),
 			label: module == undefined || module == null ? " " : module.title,
-			toNavigate: `/modules/module/${module.id}`,
+			toNavigate: `/modules/module/${module.id}/${this.languageId}/${this.diseaseId}`,
 		});
 	}
 
 	public enterModule(module: Module): void {
 		this.setupBreadCrumbCollector(module);
-		this.router.navigate([`/modules/module/${module.id}`]);
+		this.router.navigate([
+			`/modules/module/${module.id}/${this.languageId}/${this.diseaseId}`,
+		]);
 	}
 
 	public searchModules(): void {
@@ -144,7 +151,7 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 				isForCreate: module ? false : true,
 				module: module ? module : null,
 				parentModuleId: this.moduleId,
-				language: this.language,
+				languageId: this.languageId,
 			},
 		});
 
@@ -162,11 +169,11 @@ export class RenderModulesComponent implements OnInit, OnDestroy {
 
 	public navigateToGenerateContent(content: Content): void {
 		if (content) {
-			this.shareDataService.data = { content: content, isForCreate: false };
-			this.router.navigate([`/generate-content/${content.moduleId}`]);
+			this.router.navigate([
+				`/generate-content/${content.moduleId}/${content.id}`,
+			]);
 		} else {
-			this.shareDataService.data = { isForCreate: true };
-			this.router.navigate([`/generate-content/${this.moduleId}`]);
+			this.router.navigate([`/generate-content/${this.moduleId}/0`]);
 		}
 	}
 
